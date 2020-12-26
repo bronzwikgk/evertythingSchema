@@ -8,7 +8,7 @@ options.argB = argB,
 options.output.outputType = {
     "self": [true, false],
     "value": [argA, argB],
-    
+
     
 }
 options.output.ifTrue(outputType) 
@@ -38,8 +38,8 @@ class operate {
 class operator {
     constructor(typeofOperation, input, options) {
         this.defaultOperation = operate.isEmpty(input, options.output.ifFalseCallback('continue')),
-            this.typeofValidation = typeofValidation,
-            this.name = typeofValidation,
+            this.typeofOperation = typeofOperation,
+            this.name = typeofOperation,
             this.input = input,
             this.options = options,
             this.options.operateAgainst = options.operateAgainst,
@@ -47,13 +47,13 @@ class operator {
         }
 }
 
-class validationSet {
+class operationSet {
     and = every;
     or = some;
-    constructor(validation, ifTrueCallBack, ifFalseCallback) {
-        this.defaultValidation = operate.is(isArray, input, options.output.ifTrueCallback('continue'))
-        this.validationSetName = validation.name,
-            this.validation = this.operate.typeofValidation(input, options);
+    constructor(Operation, ifTrueCallBack, ifFalseCallback) {
+        this.defaultOperation = operate.is(isArray, input, options.output.ifTrueCallback('continue'))
+        this.OperationSetName = Operation.name,
+            this.Operation = this.operate.typeofOperation(input, options);
         this.actionIfTrue = ifTrueCallback;
         this.actionIfFalse = ifFalseCallback(...arguments,);
         this.options = { autoStart = true }
