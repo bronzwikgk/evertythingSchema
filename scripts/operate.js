@@ -1,10 +1,3 @@
-// "this function as like other function returns either of the 4 types of output. requested in the option parameter argument. 
-// 1. Self[True / false] : returns the output of the method called
-// 2. value[a / b] : returns either of the argument
-// 3. if (True) : callback[a / b],
-//     4. if (False) : callback[a / b]"
-
-
 
 
 class operationSet {
