@@ -9,9 +9,7 @@
  */
 
 class operationSet {
-    and = every;
-    or = some;
-    constructor(Operation, ifTrueCallBack, ifFalseCallback) {
+      constructor(operator, ifTrueCallBack, ifFalseCallback) {
         this.defaultOperation = operate.is(isArray, input, options.output.ifTrueCallback('continue'))
         this.OperationSetName = Operation.name,
         this.Operation = this.operate.typeofOperation(input, options);
@@ -21,7 +19,6 @@ class operationSet {
     }
 
 }
-
 class operator extends operationSet {
     constructor(typeofOperation, input, options) {
         this.defaultOperation = operate.isEmpty(input, options.output.ifFalseCallback('continue')),
@@ -37,8 +34,7 @@ class operator extends operationSet {
                     [{ "ifFalse": callback() }]
             }
     }
-}
-    
+}    
 class operate extends operator {
 
     static isEqual(a, b, key, value) {
@@ -62,10 +58,6 @@ class operate extends operator {
         return Number.parseFloat(factValue).toString() !== 'NaN'
     }
 }
-
-
-
-
 async function start() {
     /**
      * Setup a new engine
