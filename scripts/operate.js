@@ -4,14 +4,8 @@
 // 3. if (True) : callback[a / b],
 //     4. if (False) : callback[a / b]"
 
-options.argB = argB,
-options.output.outputType = {
-    "self": [true, false],
-    "value": [argA, argB],
 
-    
-}
-options.output.ifTrue(outputType) 
+
 
 
     
@@ -33,17 +27,21 @@ class operate {
     static isNumber(factValue) {
         return Number.parseFloat(factValue).toString() !== 'NaN'
     }
-
 }
 class operator {
     constructor(typeofOperation, input, options) {
         this.defaultOperation = operate.isEmpty(input, options.output.ifFalseCallback('continue')),
             this.typeofOperation = typeofOperation,
             this.name = typeofOperation,
-            this.input = input,
-            this.options = options,
-            this.options.operateAgainst = options.operateAgainst,
-            this.options.output,
+            this.inputArg = input,
+            options.argB = argB,
+            options.output.outputType = {
+                operate.isOneof(
+                    [{ "self": [true, false] }],
+                    [{ "value": [argA, argB] }],
+                    [{ "ifTrue": callback() }],
+                    [{ "ifFalse": callback() }]
+    }
         }
 }
 
