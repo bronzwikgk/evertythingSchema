@@ -1,4 +1,29 @@
 
+class operate extends operator {
+
+    static isEqual(argA,options) {
+        return argA === options.argB ? true : false;
+    }
+    static isEmpty(a) {
+        return Object.keys(obj).length === 0 ? true : false;
+    }
+
+    static isOneof(a, b, key, value) {
+        /**
+         * 
+         */
+        //  console.log(a,b)
+        return b.indexOf(a) > -1 ? true : false;
+    }
+    static hasAllof(a, b) {
+
+    }
+    static isNumber(factValue) {
+        return Number.parseFloat(factValue).toString() !== 'NaN'
+    }
+}
+
+
 /**
  * this operator tor class function does an array of operations from operator and operate class while using logical operator
  * it takes the followsing arguments.
@@ -19,45 +44,7 @@ class operationSet {
     }
 
 }
-class operator extends operationSet {
-    constructor(typeofOperation, input, options) {
-        this.defaultOperation = operate.isEmpty(input, options.output.ifFalseCallback('continue')),
-            this.typeofOperation = typeofOperation,
-            this.name = typeofOperation,
-            this.inputArg = input,
-            options.argB = argB,
-            options.output.outputType = {
-                operate.isOneof(
-                    [{ "self": [true, false] }],
-                    [{ "value": [argA, argB] }],
-                    [{ "ifTrue": callback() }],
-                    [{ "ifFalse": callback() }]
-            }
-    }
-}    
-class operate extends operator {
 
-    static isEqual(a, b, key, value) {
-        return a === b ? true : false;
-    }
-    static isEmpty(a) {
-        return Object.keys(obj).length === 0 ? true : false;
-    }
-
-    static isOneof(a, b, key, value) {
-        /**
-         * 
-         */
-        //  console.log(a,b)
-        return b.indexOf(a) > -1 ? true : false;
-    }
-    static hasAllof(a, b) {
-
-    }
-    static isNumber(factValue) {
-        return Number.parseFloat(factValue).toString() !== 'NaN'
-    }
-}
 async function start() {
     /**
      * Setup a new engine
