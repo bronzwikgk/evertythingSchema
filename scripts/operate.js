@@ -7,28 +7,21 @@
 
 
 
+class operationSet {
+    and = every;
+    or = some;
+    constructor(Operation, ifTrueCallBack, ifFalseCallback) {
+        this.defaultOperation = operate.is(isArray, input, options.output.ifTrueCallback('continue'))
+        this.OperationSetName = Operation.name,
+        this.Operation = this.operate.typeofOperation(input, options);
+        this.actionIfTrue = ifTrueCallback;
+        this.actionIfFalse = ifFalseCallback(...arguments,);
+        this.options = { autoStart = true }
+    }
 
-    
-class operate {
-
-    static isEqual(a, b, key, value) {
-        return a === b ? true : false;
-    }
-    static isEmpty(a) {
-        return Object.keys(obj).length === 0 ? true : false;
-    }
-    static isOneof(a, b, key, value) {
-        //  console.log(a,b)
-        return b.indexOf(a) > -1 ? true : false;
-    }
-    static hasAllof(a, b) {
-
-    }
-    static isNumber(factValue) {
-        return Number.parseFloat(factValue).toString() !== 'NaN'
-    }
 }
-class operator {
+
+class operator extends operationSet {
     constructor(typeofOperation, input, options) {
         this.defaultOperation = operate.isEmpty(input, options.output.ifFalseCallback('continue')),
             this.typeofOperation = typeofOperation,
@@ -41,23 +34,34 @@ class operator {
                     [{ "value": [argA, argB] }],
                     [{ "ifTrue": callback() }],
                     [{ "ifFalse": callback() }]
+            }
     }
-        }
+}
+    
+class operate extends operator {
+
+    static isEqual(a, b, key, value) {
+        return a === b ? true : false;
+    }
+    static isEmpty(a) {
+        return Object.keys(obj).length === 0 ? true : false;
+    }
+    static isOneof(a, b, key, value) {
+        /**
+         * 
+         */
+        //  console.log(a,b)
+        return b.indexOf(a) > -1 ? true : false;
+    }
+    static hasAllof(a, b) {
+
+    }
+    static isNumber(factValue) {
+        return Number.parseFloat(factValue).toString() !== 'NaN'
+    }
 }
 
-class operationSet {
-    and = every;
-    or = some;
-    constructor(Operation, ifTrueCallBack, ifFalseCallback) {
-        this.defaultOperation = operate.is(isArray, input, options.output.ifTrueCallback('continue'))
-        this.OperationSetName = Operation.name,
-            this.Operation = this.operate.typeofOperation(input, options);
-        this.actionIfTrue = ifTrueCallback;
-        this.actionIfFalse = ifFalseCallback(...arguments,);
-        this.options = { autoStart = true }
-    }
 
-}
 
 
 async function start() {
