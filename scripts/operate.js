@@ -46,6 +46,7 @@ class operate extends operator {
     static isEmpty(a) {
         return Object.keys(obj).length === 0 ? true : false;
     }
+    
     static isOneof(a, b, key, value) {
         /**
          * 
