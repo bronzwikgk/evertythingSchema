@@ -1,4 +1,12 @@
 
+/**
+ * this operator tor class function does an array of operations from operator and operate class while using logical operator
+ * it takes the followsing arguments.
+ *  this.operator = ["and/Every","or/some","not"]
+ * this.input = [[operate.method(input,options.output.self)]]
+ * this.output = [ { self = [true,false] },{ value =[input, argB] },{ callback =[[(ifTrue) callback;], [(ifTrue) callback;]]}]
+ * this class might be merged with operate class
+ */
 
 class operationSet {
     and = every;
