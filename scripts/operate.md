@@ -5,13 +5,14 @@ operate
 ====== 
 brief
 operate class is part of process Module.
+
 it enforces attributes and parameter on any entity processed in the process module,
 
 eg. users : { hasAllOf: true } << the operate should enforce that all the key's in while any operation on  are present in both input and output, using method [operate.hasAllof(input,options.argB,options.output.self)]>>
 
 
 
-this class extends operator class.
+this class extends operator class. [ operator might be merged to operate ]
 it takes in the following arguments and parameters.
 + input,
 + options,
