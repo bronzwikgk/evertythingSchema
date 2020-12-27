@@ -18,7 +18,7 @@ it takes in the following arguments and parameters.
 + options,
 + options.output.self = [true/false]
 + options.output.value = [input,argB]
-+ options.output.callback = [[(ifTrue) callback;],[(ifTrue) callback;]]
++ options.output.callback = [[(onTrue) callback;],[(onFalse) callback;]]
 
 
 

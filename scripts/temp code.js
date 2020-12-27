@@ -26,6 +26,17 @@
 
 }
 
+function requiredArg() {
+    throw new Error('The argument is required');
+}
+
+
+function add(x = requiredArg(), y = requiredArg()) {
+    return x + y;
+}
+console.log(add);
+
+
 
 /**
  * this operator class function does an array of operations from operator and operate class while using logical operator
