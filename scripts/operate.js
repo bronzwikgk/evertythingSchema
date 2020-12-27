@@ -15,7 +15,7 @@ class operate {
     }
     // operate to check if the input is not null or undefined to be added
     static isEmpty(input) { 
-        return typeof input != 'undefined' && Object.keys(input).length === 0 ? true : false
+        return Object.keys(input).length === 0 ? true : false
     }
     /**
      * returns if the unput is a key/value in the object options.argB
@@ -23,8 +23,18 @@ class operate {
      * @param {*} options.argB  is required to be not empty
      * 
      */
-    static isIn(input,options) {
-        return input in options.argB
+    static isIn(input, options) {
+        return Object.keys(option.argB).indexOf(input) > -1 ? true : false;
+    }
+    static isEqual(argA, options) {
+        return argA === options.argB ? true : false;
+    }
+    
+    static hasAllof(a, b) {
+
+    }
+    static isNumber(factValue) {
+        return Number.parseFloat(factValue).toString() !== 'NaN'
     }
 
 

@@ -27,30 +27,6 @@
 }
 
 
-class operate extends operator {
-
-    static isEqual(argA, options) {
-        return argA === options.argB ? true : false;
-    }
-    static isEmpty(a) {
-        return Object.keys(obj).length === 0 ? true : false;
-    }
-    static isOneof(a, b, key, value) {
-        /**
-         * 
-         */
-        //  console.log(a,b)
-        return b.indexOf(a) > -1 ? true : false;
-    }
-    static hasAllof(a, b) {
-
-    }
-    static isNumber(factValue) {
-        return Number.parseFloat(factValue).toString() !== 'NaN'
-    }
-}
-
-
 /**
  * this operator class function does an array of operations from operator and operate class while using logical operator
  * it takes the followsing arguments.
