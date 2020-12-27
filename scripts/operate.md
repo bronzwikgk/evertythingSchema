@@ -23,10 +23,11 @@ it takes in the following arguments and parameters.
 
 
 it has the followsing methods
->is.
->> + in   
+>> + is.  | command :: return Object.getPrototypeOf(input).constructor.name;//entity.__proto__.constructor.name
+>> + isEmpty  | command :: return Object.keys(input).length === 0 ? true : false
+>> + in.   
           | to check if a property is in an object [ has a default operate to check if the input is an object, throws an error if not].
->> + isEmpty 
+
 >> + isObject
 >> + isArray
 >> + isString

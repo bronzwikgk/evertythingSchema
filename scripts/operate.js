@@ -2,7 +2,17 @@
 //https://www.javascripttutorial.net/es-next/javascript-optional-chaining-operator/
 //https://www.javascripttutorial.net/javascript-ternary-operator/
 
+function requiredArg() {
+    throw new Error('The argument is required');
+}
 
+
+function add(x = requiredArg(), y = requiredArg()) {
+    return x + y;
+}
+
+//add(10); // error
+add(10, 20); // OK
 
 class operate {
    
@@ -14,7 +24,7 @@ class operate {
         return Object.getPrototypeOf(input).constructor.name;//entity.__proto__.constructor.name
     }
     // operate to check if the input is not null or undefined to be added
-    static isEmpty(input) { 
+    static isEmpty(input) {
         return Object.keys(input).length === 0 ? true : false
     }
     /**
@@ -36,8 +46,4 @@ class operate {
     static isNumber(factValue) {
         return Number.parseFloat(factValue).toString() !== 'NaN'
     }
-
-
-
-
 }
