@@ -164,7 +164,7 @@ function isDate(value) {
 
 //Returns if the value is a Prototyp
 function isPrototype(value) {
-    console.log(Object.getPrototypeOf(object1) === prototype1);
+    console.log(Object.getPrototypeOf(value) === prototype1);
 }
 
 
