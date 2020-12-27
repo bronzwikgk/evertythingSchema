@@ -54,12 +54,7 @@ class entityRegistry {
 entityRegistry.addItem(a);
 console.log(a)
 
-// This creates an index which when called with sytax of createIndex.next().value will give you an index new value.
-function* createIndex() {
-    let number = 1;
-    while (true)
-        yield number++;
-}
+
 
 function serialize() {
     const languageOverridesByBufferId = {};

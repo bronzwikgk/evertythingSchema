@@ -119,9 +119,9 @@ class operate {
     /**
      *  * Returns true if the given test value is an array containing at least one object; false otherwise.
      * */
-    static isObjectArray_(test) {
-        for (var i = 0; i < test.length; i++) {
-            if (isObject_(test[i])) {
+    static isObjectArray_(argA) {
+        for (var i = 0; i < argA.length; i++) {
+            if (isObject_(argA[i])) {
                 return true;
             }
         }
