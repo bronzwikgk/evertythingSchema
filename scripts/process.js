@@ -8,12 +8,26 @@ function* createIndex() {
 const index = createIndex();
 
 class Entity { 
-    constructor(input,output) { 
-        this.id = "ehhId" + index.next().value;
-        this.name = input
+    constructor(input, output) { this.id = "ehhId" + index.next().value; this.name = input; }
+    
+    create(input, output, key, value, callback) {
+        if (!Object.keys(input).length) return;// if there's no keys, then the call returns undefined
+        console.log(input?.constructor)
+        switch (input?.constructor) {
+            case Object:
+                processSchema.iterateObj(input, output, key, value);
+            case Array:
+                processSchema.iterateArr(input, output, key, value);
+            case String:
+            //processSchema.processString(input, output);
+            default:
+            // return
+        }
+        return output;
     }
-
 }
+
+
 
 var temp = new Entity("yo", {});
 console.log(temp)
