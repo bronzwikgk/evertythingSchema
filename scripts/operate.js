@@ -13,13 +13,17 @@ class operate {
     static is(input,options) { 
         return Object.getPrototypeOf(input).constructor.name;//entity.__proto__.constructor.name
     }
+    // operate to check if the input is not null or undefined to be added
+    static isEmpty(input) { 
+        return typeof input != 'undefined' && Object.keys(input).length === 0 ? true : false
+    }
     /**
-     * returns if the unput is a key/value in an object
+     * returns if the unput is a key/value in the object options.argB
      * @param {*} input 
-     * @param {*} options 
-     * @param {*} argB 
+     * @param {*} options.argB  is required to be not empty
+     * 
      */
-    static isEmpty(input,options.argB) {
+    static isIn(input,options) {
         return input in options.argB
     }
 
