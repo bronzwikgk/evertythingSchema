@@ -1,4 +1,7 @@
 
+//https://www.javascripttutorial.net/es-next/javascript-nullish-coalescing-operator/
+//  leftExpression ?? rightExpression
+
 //basic operate syntax usnig teranry operator.
 
 //condition ? expression_1 : expression_2;
