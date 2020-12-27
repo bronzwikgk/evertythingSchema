@@ -1,13 +1,5 @@
 
 
-// This function convert sheet data into the JSON format
-function convertToJson() {
-
-    RectangularDataToJson.convertJsonFromRectangularData("1ynjljIkJbvLeYe4fT1mdJ1vmJFbL9YwkI2BSUqqAm3w", "workflowData", "outputInJson")
-    //RectangularDataToJson.updateJsonFromRectangularData("1ynjljIkJbvLeYe4fT1mdJ1vmJFbL9YwkI2BSUqqAm3w","workflowData","outputInJson")
-
-}
-
 // this function will call workflow function with next executing parameters 
 function call() {
     // get parameters from the script properties and store them in the variable
