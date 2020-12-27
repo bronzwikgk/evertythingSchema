@@ -112,7 +112,23 @@ class operate {
     //Returns if the value is a Prototyp
     static isPrototype(value) { console.log(Object.getPrototypeOf(value) === prototype1); }
     // Returns if a Symbol
-    static isSymbol(value) { return typeof value === 'symbol';  }
+    static isSymbol(value) { return typeof value === 'symbol'; }
+    //This function validates a valid Url, Returns True or false
+    static isValidUrl(string) { try { new URL(string); } catch (_) { return false; } return true; }
+    static isValidJSONString(str) { try { JSON.parse(str); } catch (e) { return false; } return true; }
+    /**
+     *  * Returns true if the given test value is an array containing at least one object; false otherwise.
+     * */
+    static isObjectArray_(test) {
+        for (var i = 0; i < test.length; i++) {
+            if (isObject_(test[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+    static isChild(argA, argB) { }
+    static isParent(argA, argB) { }
 
 }
 
