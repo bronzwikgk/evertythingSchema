@@ -10,28 +10,25 @@
 
 
 class ActionEditor {
-    
     constructor(argA, argB, options) {
         this.id = 'actionEditor' + createIndex();
         this.tagName = {
             value: null,
             operate: ['isString', 'isNotEmpty']
         };
+        this.config = actionEditorConfig;
       
     }
-
 }
 class Entity extends ActionEditor{
 
 }
-
 class Range extends Entity { 
     constructor() {
         this.name = "ehhRange"
 
     }
 }
-
 class BlockStatement{
     constructor() {
         this.identifier = "{";
@@ -40,7 +37,6 @@ class BlockStatement{
     }
 
 }
-
 class ActionController{
     //readEntity
     //addEntity
@@ -49,7 +45,7 @@ class ActionController{
 }
 // Store Class: Handles Storage
 class Store {
-    static getEntity() {
+    static getItem() {
         let entitys;
         if (localStorage.getItem('getEntity') === null) {
             entitys = [];
@@ -60,17 +56,17 @@ class Store {
         return entitys;
     }
 
-    static addentity(entity) {
+    static setItem(entity) {
         const entitys = Store.getentitys();
         entitys.push(entity);
         localStorage.setItem('entitys', JSON.stringify(entitys));
     }
 
-    static removeentity(isbn) {
+    static removeItem(id) {
         const entitys = Store.getentitys();
 
         entitys.forEach((entity, index) => {
-            if (entity.isbn === isbn) {
+            if (entity.id === id) {
                 entitys.splice(index, 1);
             }
         });
@@ -78,9 +74,8 @@ class Store {
         localStorage.setItem('entitys', JSON.stringify(entitys));
     }
 }
-
 class renderView{
-    
+
     static insertInEditor(editor, input, insertRange) {
     // Find the current cursor position
     const startPos = textArea.selectionStart;
@@ -101,9 +96,13 @@ class renderView{
     }
 
     static renderActionEditor() { 
+        return console.log("loading view");
         //this function reqs actionEditor key from store and builds a ui. It also takes care of the output
     }
     static clearActionEditor() {
-     
+    
     }
 }
+var newActionEditor = renderView.renderActionEditor();
+console.log(newActionEditor)
+
