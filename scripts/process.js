@@ -9,10 +9,30 @@ const index = createIndex();
 
 class Entity { 
     
-    constructor(input, output) { this.id = "ehhId" + index.next().value; this.name = input; }  
+    constructor(input, output) {
+        this.id = "ehhId" + index.next().value;
+        this.name = {
+            value: null,
+            operate : ['isString', 'isNotEmpty']
+        };
+        this.name = input;
+        this.output = {
+            output: null,
+            operate : ['isHtml','isNotEmpty']
+        }
+    }  
     
-    create(input, output, key, value) {
+    create(input, output, key, value) { 
+        console.log(this.output.operate)
+        if (operator.onEvery1(input, output, this.output.operate)) {
         
+            output.output = document.createElement(input);
+           // console.log(output);
+            return true;
+        }
+        return false;
+
+
         if (operate.is(output).includes("HTML")) { //Only HTML creation
             //    console.log("got request for  from create", input, output, key, value)
             if (operate.is(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
@@ -50,10 +70,10 @@ class Entity {
     }
 }
 
+var temp = new Entity("yo", inputElement);
+output = temp.create("yo", inputElement);
 
-
-var temp = new Entity("yo", );
-//console.log(temp)
+console.log(output)
 
 class process extends Entity{
     

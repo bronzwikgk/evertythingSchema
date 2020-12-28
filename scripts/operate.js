@@ -44,18 +44,26 @@
 
 //     }
 // }
+class operator { 
+    //    //arr.every(callback(element[, index[, array]])[, thisArg])
+    static onEvery1(a, b, callbacks) {
+        console.log(callbacks)
+      
+        return callbacks.every(function (callback) {
+            console.log(self)
+
+            return operate.callback(a, b);
+        });
+    }
+
+}
 
 class operate {
-       
-    //    //arr.every(callback(element[, index[, array]])[, thisArg])
-    // static onEvery1(a, b, callback) { console.log(arguments); return a.every(static (value) { return operate.isIn(value, b); }); 
-        
-    // }
     // operate to check if the input is not null or undefined to be added
     static isEmpty(argA) { return Object.keys(argA).length === 0 ? true : false }
     static isNotEmpty(argA) { return argA !== '' && argA !== null && typeof argA !== 'undefined' ? true : false }
-            //returs the data Type of the input.
-    static is(argA) {return Object.getPrototypeOf(argA).constructor.name; }
+    //returs the data Type of the input.
+    static is(argA) { return Object.getPrototypeOf(argA).constructor.name; }
     static isInt(argA) { return Number.isInteger(argA); }
     static isNumber(argA) { return Number.parseFloat(argA).toString() !== 'NaN' }
     static isString(argA) { return typeof argA === 'string' ? true : false }
@@ -65,12 +73,12 @@ class operate {
      * @param {*} argB  is required to be not empty
      * 
      */
-    static isIn(argA, argB) {return argB.indexOf(argA) > -1 ? true : false; }
+    static isIn(argA, argB) { return argB.indexOf(argA) > -1 ? true : false; }
     //curently works only for string numbers
-    static isEqualStrict(argA, argB) {return argA === argB ? true : false; }
+    static isEqualStrict(argA, argB) { return argA === argB ? true : false; }
     //for array's one sided value existence check, return true if each element of a is present in b
     static isGreaterThan(argA, argB) { return argA > argB ? true : false }
-    static isGreaterthanOrEqual(argA, argB){ return argA => argB ? true : false }
+    static isGreaterthanOrEqual(argA, argB) { return argA => argB ? true : false }
     static isSmallerthan(argA, argB) { return argA < argB ? true : false }
     static isSmallerthanOrEqual(argA, argB) { return argA <= argB ? true : false }
     static instanceof(argA, argB) { return console.log("work in process"); }
@@ -80,16 +88,16 @@ class operate {
         return console.log("work in process");
     }
     //check if argB has all the keys from argA // only for array.
-    static hasAllof(argA, argB) { return argA.every(function (value) { console.log(value, argB); return operate.isIn(value, argB)}); }
+    static hasAllof(argA, argB) { return argA.every(function (value) { console.log(value, argB); return operate.isIn(value, argB) }); }
     static arrayIncludes(argA, argB) { return argA.includes(function (value) { return operate.isIn(value, argB); }); }
     //Check for bothArgument to be Number and Integer to be added.
     static isInRangeNumbers(argA, argB) { return argA.every(function (value) { return operate.isGreaterthanOrEqual(value, argB.min) && operate.isSmallerthanOrEqual(value, argB.max); }); }
-   //return true if all items are the same in two unordered Array need to add a return of mismatch values as option.
+    //return true if all items are the same in two unordered Array need to add a return of mismatch values as option.
     static isSameArray(argA, argB) {
         argA.sort(); argB.sort(); if (argA.length !== argB.length) return false;
-        for (let i = 0; i < argA.length; i++) { if (argA[i] !== argB[i]) return false;} return true;
+        for (let i = 0; i < argA.length; i++) { if (argA[i] !== argB[i]) return false; } return true;
     }
-     // Returns if a value is an array
+    // Returns if a value is an array
     static isArray(value) { return value && Array.isArray(value) && typeof value === 'object' && value.constructor === Array; }
     // Returns if a value is a static
     static isstatic(value) { return typeof value === 'static'; }
@@ -128,6 +136,9 @@ class operate {
     }
     static isChild(argA, argB) { }
     static isParent(argA, argB) { }
+    static isEven(argA) { return numbers.every(function (e) { return e % 2 == 0; }); }
+    static isOdd(argA) { return numbers.every(function (e) { return Math.abs(e % 2) == 1; }); }
+
 
 }
 
@@ -136,5 +147,5 @@ class operate {
 inputElement = document.createElement("form");
 //console.log(isInRange)
 output = operate.isHTML(inputElement, inputB);
-console.log(output);
+//console.log(output);
 //console.log(inputElement)
