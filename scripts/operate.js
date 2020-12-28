@@ -89,14 +89,13 @@ class operate {
         argA.sort(); argB.sort(); if (argA.length !== argB.length) return false;
         for (let i = 0; i < argA.length; i++) { if (argA[i] !== argB[i]) return false;} return true;
     }
-    // Returns if a value is really a number
-    static isNumber(argA) { return typeof argA === 'number' && isFinite(argA); }
-    // Returns if a value is an array
+     // Returns if a value is an array
     static isArray(value) { return value && Array.isArray(value) && typeof value === 'object' && value.constructor === Array; }
     // Returns if a value is a static
     static isstatic(value) { return typeof value === 'static'; }
     // Returns if a value is an object
     static isObject(value) { return value && typeof value === 'object' && value.constructor === Object; }
+    static isHTML(argA) { return operate.is(argA).includes("HTML") }
     // Returns if a value is null
     static isNull(value) { return value === null; }
     // Returns if a value is undefined 
@@ -121,7 +120,7 @@ class operate {
      * */
     static isObjectArray_(argA) {
         for (var i = 0; i < argA.length; i++) {
-            if (isObject_(argA[i])) {
+            if (operate.isObject(argA[i])) {
                 return true;
             }
         }
@@ -133,7 +132,9 @@ class operate {
 }
 
 
+
+inputElement = document.createElement("form");
 //console.log(isInRange)
-output = operate.isSameArray(inputA, inputB);
+output = operate.isHTML(inputElement, inputB);
 console.log(output);
-console.log(inputElement)
+//console.log(inputElement)

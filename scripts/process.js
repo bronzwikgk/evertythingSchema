@@ -8,29 +8,52 @@ function* createIndex() {
 const index = createIndex();
 
 class Entity { 
-    constructor(input, output) { this.id = "ehhId" + index.next().value; this.name = input; }
     
-    create(input, output, key, value, callback) {
-        if (!Object.keys(input).length) return;// if there's no keys, then the call returns undefined
-        console.log(input?.constructor)
-        switch (input?.constructor) {
-            case Object:
-                processSchema.iterateObj(input, output, key, value);
-            case Array:
-                processSchema.iterateArr(input, output, key, value);
-            case String:
-            //processSchema.processString(input, output);
-            default:
-            // return
+    constructor(input, output) { this.id = "ehhId" + index.next().value; this.name = input; }  
+    
+    create(input, output, key, value) {
+        
+        if (operate.is(output).includes("HTML")) { //Only HTML creation
+            //    console.log("got request for  from create", input, output, key, value)
+            if (operate.is(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
+                //   console.log("creating div object", key, value)
+                var nwEle = document.createElement("div");
+                nwEle.className = input;
+                //  nwEle.className = "createdFromObject";
+            } else if (operate.is(value) === 'Array') {
+                var nwEle = document.createElement(input);
+                nwEle.className = "createdFromArrayProperty";
+
+            } else if (operate.is(value) === 'String' || operate.is(value) === 'Boolean') {
+                //     console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
+                if (formElements.indexOf(input) < 0) { //check if the input is a formElement by crosschecking in the define array.
+                    var nwEle = document.createElement("div");
+                    nwEle.className = input;
+                    // console.log("divElement", nwEle);
+                } else {
+
+                    //    console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
+                    var nwEle = document.createElement(input);
+                    nwEle.className = "createdFromStringProperty";
+                    var content = document.createTextNode(value);
+                    nwEle.appendChild(content);
+                    //  nwEle.setAttribute("value", key);
+                    //    console.log("formElement", nwEle);
+
+                }
+            } else {
+                console.log("strays")
+            }
+            // console.log("new element from create",nwEle)
+            return nwEle;
         }
-        return output;
     }
 }
 
 
 
-var temp = new Entity("yo", {});
-console.log(temp)
+var temp = new Entity("yo", );
+//console.log(temp)
 
 class process extends Entity{
     
@@ -125,23 +148,6 @@ class process extends Entity{
 
 }
 
-const unqueArray = Array.from(new Set("input"));
 
-const items = [1, false, "Devsage", 3.14]
 
-//const items = Infinity;
-class Iterator{
-    constructor(Array) { this.Array = Array, this.index = 0 }
-    hasNext() { console.log(this.Array); return this.index < this.Array.length }
-    next() { return this.Array[this.index++] }
-}
-
-// const iter = new Iterator(items)
-// console.log(items)
-// console.log(iter.hasNext())
-
-// while(iter.hasNext())
-//   console.log(iter.next())
-
-// console.log(iter.hasNext())
 

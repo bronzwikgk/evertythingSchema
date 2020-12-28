@@ -19,7 +19,6 @@ class processSchema {
     static create(input, output,key,value) { 
         if (getEntityType(output).includes("HTML")) { //Only HTML creation
         //    console.log("got request for  from create", input, output, key, value)
-
             if (getEntityType(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
            //   console.log("creating div object", key, value)
                 var nwEle = document.createElement("div");

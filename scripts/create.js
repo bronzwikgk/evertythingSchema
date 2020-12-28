@@ -22,7 +22,6 @@ function createTable(tableData) {
     return table;
 }
 
-
 function create(entity) {
     window[entity] = onEvent;
 }
