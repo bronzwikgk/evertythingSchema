@@ -7,8 +7,7 @@ function* createIndex() {
 
 const index = createIndex();
 
-class Entity { 
-    
+class Entity1 { 
     constructor(input, output) {
         this.id = "ehhId" + index.next().value;
         this.name = {
@@ -18,66 +17,25 @@ class Entity {
         this.name = input;
         this.output = {
             output: null,
-            operate : ['isHtml','isNotEmpty']
+            operate: ['isHTML','isNotEmpty']
         }
     }  
     
     create(input, output, key, value) { 
-        console.log(this.output.operate)
-        if (operator.onEvery1(input, output, this.output.operate)) {
-        
-            output.output = document.createElement(input);
-           // console.log(output);
-            return true;
+       
+        if (operator.onEvery1(output, output, this.output.operate)) {
+          
+            output = document.createElement(input); 
+            output.name = this.name;
+            console.log(output)
+            return output;
         }
         return false;
-
-
-        if (operate.is(output).includes("HTML")) { //Only HTML creation
-            //    console.log("got request for  from create", input, output, key, value)
-            if (operate.is(value) === 'Object') {//An object property generates a fieldset, i.e. a <fieldset> element.
-                //   console.log("creating div object", key, value)
-                var nwEle = document.createElement("div");
-                nwEle.className = input;
-                //  nwEle.className = "createdFromObject";
-            } else if (operate.is(value) === 'Array') {
-                var nwEle = document.createElement(input);
-                nwEle.className = "createdFromArrayProperty";
-
-            } else if (operate.is(value) === 'String' || operate.is(value) === 'Boolean') {
-                //     console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
-                if (formElements.indexOf(input) < 0) { //check if the input is a formElement by crosschecking in the define array.
-                    var nwEle = document.createElement("div");
-                    nwEle.className = input;
-                    // console.log("divElement", nwEle);
-                } else {
-
-                    //    console.log("create Request property for ", input, output, key, value, formElements.indexOf(input))
-                    var nwEle = document.createElement(input);
-                    nwEle.className = "createdFromStringProperty";
-                    var content = document.createTextNode(value);
-                    nwEle.appendChild(content);
-                    //  nwEle.setAttribute("value", key);
-                    //    console.log("formElement", nwEle);
-
-                }
-            } else {
-                console.log("strays")
-            }
-            // console.log("new element from create",nwEle)
-            return nwEle;
-        }
     }
 }
 
-var temp = new Entity("yo", inputElement);
-output = temp.create("yo", inputElement);
-
-console.log(output)
-
-class process extends Entity{
+class process {
     
-
     static iterate(input, output, key, value, callback) {
 
         if (!Object.keys(input).length) return;// if there's no keys, then the call returns undefined
@@ -100,7 +58,7 @@ class process extends Entity{
 
                 // console.log("creating fieldSet object", key, input[key])
 
-                var currentNode = processSchema.create(key, output, key, input[key]);
+                var currentNode = entity.create(key, output, key, input[key]);
                 //  console.log("recived from create",currentNode)
                 processSchema.iterate(input[key], currentNode, key, input[key]);
 
@@ -108,7 +66,7 @@ class process extends Entity{
 
             } else if (operate.is(input[key]) === 'Array') {
 
-                var currentNode = processSchema.create(key, output, key, input[key]);
+                var currentNode = entity.create(key, output, key, input[key]);
                 //  console.log("recived from create", currentNode)
 
                 processSchema.iterate(input[key], currentNode, key, input[key]);
@@ -117,7 +75,7 @@ class process extends Entity{
 
             } else if (operate.is(input[key]) === 'String' || operate.is(input[key]) === 'Function' || operate.is(input[key]) === 'Boolean') {
                 //   console.log("create req property object", key, input[key])
-                var currentNode = processSchema.create(key, output, key, input[key]);
+                var currentNode = entity.create(key, output, key, input[key]);
 
                 if (processSchema.validate(input[key], supportedType, key, input[key], "isOneOf")) {
                     currentNode.setAttribute("type", input[key]);
@@ -136,7 +94,7 @@ class process extends Entity{
             if (operate.is(input[i]) === 'Object') {
                 // console.log("found Object in array", input[i],output)
 
-                var currentNode = processSchema.create(key, output, input[i], input[i]);
+                var currentNode = entity.create(key, output, input[i], input[i]);
                 //console.log("recived from create",currentNode)
                 processSchema.iterate(input[i], currentNode, key, input[i]);
 
@@ -145,7 +103,7 @@ class process extends Entity{
             } else if (operate.is(input[i]) === 'Array') {
                 //  console.log("found Object in array", input[i])
             } else if (operate.is(input[i]) === 'String' || operate.is(input[i]) === 'Function' || operate.is(input[i]) === 'Boolean') {
-                var currentNode = processSchema.create(key, output, input[i], input[i]);
+                var currentNode = entity.create(key, output, input[i], input[i]);
                 processSchema.appendChild(currentNode, output);
             } else {
             }
@@ -161,13 +119,51 @@ class process extends Entity{
 
 
     }
+    //Filters allowed Keys [array] from a raw object.
+    static filter(allowed, raw,callback) {
+
+        if (!response) { var response = {} };
+        console.log(allowed, response)
+        for (var key in raw) {
+            if (operate.isEqualStrict(operate.isIn(key, allowed), true)) {
+                response[key] = raw[key];
+            }
+        }
+        return response;
+    }
 
 
+}
+//this function finds a key inside an object. Not recursivly.
 
+class dataHelper { 
+    static unique() { }
+    
+    static conduct(callback, trigger, a, b) {
+        callback.call(a, b);
+    }
+ 
 
+    static find(entity, keyTofind) {
+    console.log("finding", keyTofind, "in", entity);
+    var result = Object.keys(entity).filter(function (key, index, self) { return !key.indexOf(keyTofind); }); return result;
+}
+}
 
+const raw = { item1: { prop: '1' }, item2: { prop: '2' }, item3: { prop: '3' } };
+const body = document.getElementsByTagName('body')[0];
+//console.log(body);
+
+const requestedKeys = ['attributes', 'tagName', 'childNodes', 'nodeType'];
+var options = {
+    recurse : true,
+    output : ['callback', 'returnValue', 'returnKey', 'returnAll', 'Boolean'],
+    returnValue : ['isNotEmpty', 'hasAllof', 'isString', 'isfunction', 'isBoolean']
 }
 
 
 
 
+
+// var output = process.filter(requestedKeys, body);
+// console.log(JSON.stringify(output));

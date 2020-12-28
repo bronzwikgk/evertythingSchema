@@ -38,23 +38,18 @@
 
 
 
-// class process {
-//     static onEveryEntity(a, b, callback) {
-//         a.every(static (element) { callback(element, b); });
 
-//     }
-// }
+class conductor { 
+//this function calls a callback function with a and b parameter. Conducted Routes have to be registered before else will throw error.
+  //  on param = [ anyEvent ]
+    static conduct(a, b, callback,on) { 
+
+
+    }
+}
 class operator { 
     //    //arr.every(callback(element[, index[, array]])[, thisArg])
-    static onEvery1(a, b, callbacks) {
-        console.log(callbacks)
-      
-        return callbacks.every(function (callback) {
-            console.log(self)
-
-            return operate.callback(a, b);
-        });
-    }
+    static onEvery1(a, b, callbacks) { return callbacks.every(function (callback) {return operate[callback](a, b);}); }
 
 }
 
@@ -144,7 +139,8 @@ class operate {
 
 
 
-inputElement = document.createElement("form");
+
+inputElement = document.createElement("div");
 //console.log(isInRange)
 output = operate.isHTML(inputElement, inputB);
 //console.log(output);

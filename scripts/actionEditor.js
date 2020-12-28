@@ -55,24 +55,6 @@ entityRegistry.addItem(a);
 console.log(a)
 
 
-
-function serialize() {
-    const languageOverridesByBufferId = {};
-    this.languageOverridesByBufferId.forEach((languageId, bufferId) => {
-        languageOverridesByBufferId[bufferId] = languageId;
-    });
-    return { languageOverridesByBufferId };
-}
-
-function deserialize(params) {
-    for (const bufferId in params.languageOverridesByBufferId || {}) {
-        this.languageOverridesByBufferId.set(
-            bufferId,
-            params.languageOverridesByBufferId[bufferId]
-        );
-    }
-}
-
 var actionEditor = document.getElementById("ehhActionEditor");
 
 actionEditor.addEventListener('keyup', refresh);
