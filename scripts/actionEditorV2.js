@@ -80,11 +80,28 @@ class Store {
 }
 
 class renderView{
-    static refreshView() { 
-
+    
+    static insertInEditor(editor, input, insertRange) {
+    // Find the current cursor position
+    const startPos = textArea.selectionStart;
+    const endPos = textArea.selectionEnd;
+    // Get the current contents of the editor
+    const before = textArea.value;
+    // Get everything to the left of the start of the selection
+    const left = before.substring(0, startPos);
+    // Get everything to the right of the start of the selection
+    const right = before.substring(endPos);
+    // Concatenate the new contents.
+    textArea.value = left + contents + right;
+    // Move the cursor to the end of the inserted content.
+    const newPos = startPos + contents.length;
+    textArea.selectionStart = newPos;
+    textArea.selectionEnd = newPos;
+    //    app.setModified(true);
     }
-    static renderActionEditor() { 
 
+    static renderActionEditor() { 
+        //this function reqs actionEditor key from store and builds a ui. It also takes care of the output
     }
     static clearActionEditor() {
      
