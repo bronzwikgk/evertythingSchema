@@ -133,8 +133,6 @@ class operate {
     static isParent(argA, argB) { }
     static isEven(argA) { return numbers.every(function (e) { return e % 2 == 0; }); }
     static isOdd(argA) { return numbers.every(function (e) { return Math.abs(e % 2) == 1; }); }
-
-
 }
 
 
