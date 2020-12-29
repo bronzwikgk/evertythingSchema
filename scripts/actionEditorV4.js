@@ -69,12 +69,14 @@ class Model1 {
 class Model {
     constructor() {
         this.entityCollection = [{
-            id: 'Model_' + index.next().value
+            id: 'entity - ' + index.next().value
            // content : input.content,
         }]
     }
 
     addEntity(entity) {
+        entity.id = this.entityCollection.id;
+        
         this.entityCollection.push(entity);
         console.log(this);
 
@@ -82,6 +84,7 @@ class Model {
 
     deleteEntity(entityId) { 
         //find Entity. delete it.
+        this.entityCollection = this.entityCollection.filter((entity) => entity.id !== id)
     }
 
 }
