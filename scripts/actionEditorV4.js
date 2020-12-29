@@ -5,7 +5,11 @@ function* createIndex() {
         yield number++;
 }
 const index = createIndex();
+var addButton = {
+    name : 'addActionEditor',
+    
 
+}
 var actionEditor = {
     name : 'actionEditor',
     htmlContent : '',
@@ -20,7 +24,7 @@ var actionEditor = {
         placeholder: 'Enter text here...',
         translate: 'no',
         defaultParagraphSeparator: 'p',
-        defaultFontName: 'Arial'
+        defaultFontName: 'Poppins'
     },
     customClasses: [
         {
@@ -43,8 +47,14 @@ var actionEditor = {
         operate : ['isNotEmpty'] 
     },
     selector: 'my-app',
-    templateUrl: './app.component.html',
-    storage:'localStorage'
+  //  templateUrl: './app.component.html',
+    storage:'localStorage',
+    nonWordCharList : '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?-…',
+    lineNumbers: true,
+         mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
+         output : ['self','output'],
+         tabSize: 2,
+         indentWithTabs: true
 
 }
 
@@ -72,14 +82,11 @@ class Model {
         console.log(this);
 
     }
-
     deleteEntity(entityId) { 
         //find Entity. delete it.
         this.entityCollection = this.entityCollection.filter((entity) => entity.id !== id)
     }
-
 }
-
 class View {
    
     constructor() {
@@ -109,26 +116,29 @@ class Controller {
         this.model = model
         this.view = view
     }
-
     init() {
       this.createListener();
       //console.log(this);
       this.view.render();
     }
     createListener() {
-        //var body = document.getElementsByTagName('body')
-        var bodyListener = document.addEventListener('click',onClick);
+        var bodyListener = document.addEventListener('click',this.onClick);
         console.log('listernerCreated',bodyListener)
+    }
+    onClick(e){
+        console.log("I was called")
+        e.preventDefault();
+
     }
 
 }
-function onClick(){
-    console.log("I was called")
-}
+
+
 const ehhApp = new Controller(new Model(), new View())
 //ehhApp.view.render();
-ehhApp.init();
+window.onload = ehhApp.init();
 
-input = document.createElement("div");
+
+//input = document.createElement("div");
 
 //console.log(ehhApp.View.createElement("div"))
