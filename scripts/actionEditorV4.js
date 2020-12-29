@@ -104,16 +104,18 @@ class View {
 }
 
 class Controller {
+    
     constructor(model, view) {
         this.model = model
         this.view = view
     }
+
     init() {
-        this.Controller.listener();
-        this.View.render();
+      this.createListener();
+      //console.log(this);
+      this.view.render();
     }
-    listener(){
-        console.log(this);
+    createListener() {
         //var body = document.getElementsByTagName('body')
         var bodyListener = document.addEventListener('click',onClick);
         console.log('listernerCreated',bodyListener)
@@ -124,8 +126,8 @@ function onClick(){
     console.log("I was called")
 }
 const ehhApp = new Controller(new Model(), new View())
-ehhApp.view.render();
-ehhApp.listener();
+//ehhApp.view.render();
+ehhApp.init();
 
 input = document.createElement("div");
 
