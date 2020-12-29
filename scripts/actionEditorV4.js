@@ -92,9 +92,10 @@ class Model {
 class View {
    
     constructor() {
-        this.ehhApp = this.getElement('#ehhView')
+      //  this.ehhApp = this.getElement('#ehhView')
     }
-    init() {
+
+    render() {
         console.log(":)")
     }
     // Create an element with an optional CSS class
@@ -116,9 +117,15 @@ class Controller {
         this.model = model
         this.view = view
     }
+    init() {
+        this.View.render();
+    }
 }
 
 const ehhApp = new Controller(new Model(), new View())
+
+//ehhApp.init();
+ehhApp.View.init();
 input = document.createElement("div");
 
 //console.log(ehhApp.View.createElement("div"))
