@@ -4,7 +4,7 @@
 class ActionEditorModel{
     constructor(input) {
       //  console.log(input)
-        this.actionEditor,
+             this.actionEditor,
             this.id = 'actionEditor',
        //     this.value = input.value,
             this.tagName = {
