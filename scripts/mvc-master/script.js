@@ -5,50 +5,50 @@
  */
 class Model {
   constructor() {
-    this.todos = JSON.parse(localStorage.getItem('todos')) || []
+    this.notes = JSON.parse(localStorage.getItem('notes')) || []
   }
 
   bindTodoListChanged(callback) {
     this.onTodoListChanged = callback
   }
 
-  _commit(todos) {
-    this.onTodoListChanged(todos)
-    localStorage.setItem('todos', JSON.stringify(todos))
+  _setItem(notes) {
+    this.onTodoListChanged(notes)
+    localStorage.setItem('notes', JSON.stringify(notes))
   }
 
   addTodo(todoText) {
     const todo = {
-      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
+      id: this.notes.length > 0 ? this.notes[this.notes.length - 1].id + 1 : 1,
       text: todoText,
       complete: false,
     }
 
-    this.todos.push(todo)
+    this.notes.push(todo)
 
-    this._commit(this.todos)
+    this._setItem(this.notes)
   }
 
   editTodo(id, updatedText) {
-    this.todos = this.todos.map(todo =>
+    this.notes = this.notes.map(todo =>
       todo.id === id ? { id: todo.id, text: updatedText, complete: todo.complete } : todo
     )
 
-    this._commit(this.todos)
+    this._setItem(this.notes)
   }
 
   deleteTodo(id) {
-    this.todos = this.todos.filter(todo => todo.id !== id)
+    this.notes = this.notes.filter(todo => todo.id !== id)
 
-    this._commit(this.todos)
+    this._setItem(this.notes)
   }
 
   toggleTodo(id) {
-    this.todos = this.todos.map(todo =>
+    this.notes = this.notes.map(todo =>
       todo.id === id ? { id: todo.id, text: todo.text, complete: !todo.complete } : todo
     )
 
-    this._commit(this.todos)
+    this._setItem(this.notes)
   }
 }
 
@@ -59,7 +59,7 @@ class Model {
  */
 class View {
   constructor() {
-    this.app = this.getElement('#root')
+    this.app = this.getElement('#ehh')
     this.form = this.createElement('form')
     this.input = this.createElement('input')
     this.input.type = 'text'
@@ -69,12 +69,12 @@ class View {
     this.submitButton.textContent = 'Submit'
     this.form.append(this.input, this.submitButton)
     this.title = this.createElement('h1')
-    this.title.textContent = 'Todos'
+    this.title.textContent = 'notes'
     this.todoList = this.createElement('ul', 'todo-list')
     this.app.append(this.title, this.form, this.todoList)
-
     this._temporaryTodoText = ''
     this._initLocalListeners()
+    console.log(this)
   }
 
   get _todoText() {
@@ -99,20 +99,20 @@ class View {
     return element
   }
 
-  displayTodos(todos) {
+  displaynotes(notes) {
     // Delete all nodes
     while (this.todoList.firstChild) {
       this.todoList.removeChild(this.todoList.firstChild)
     }
 
     // Show default message
-    if (todos.length === 0) {
+    if (notes.length === 0) {
       const p = this.createElement('p')
       p.textContent = 'Nothing to do! Add a task?'
       this.todoList.append(p)
     } else {
       // Create nodes
-      todos.forEach(todo => {
+      notes.forEach(todo => {
         const li = this.createElement('li')
         li.id = todo.id
 
@@ -142,7 +142,7 @@ class View {
     }
 
     // Debugging
-    console.log(todos)
+    console.log(notes)
   }
 
   _initLocalListeners() {
@@ -216,12 +216,12 @@ class Controller {
     this.view.bindDeleteTodo(this.handleDeleteTodo)
     this.view.bindToggleTodo(this.handleToggleTodo)
 
-    // Display initial todos
-    this.onTodoListChanged(this.model.todos)
+    // Display initial notes
+    this.onTodoListChanged(this.model.notes)
   }
 
-  onTodoListChanged = todos => {
-    this.view.displayTodos(todos)
+  onTodoListChanged = notes => {
+    this.view.displaynotes(notes)
   }
 
   handleAddTodo = todoText => {
