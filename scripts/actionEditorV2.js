@@ -8,9 +8,10 @@
 //     StatementList
 // }
 
+var actionEditorConfig = {};
 
 class ActionEditor {
-    constructor(argA, argB, options) {
+    constructor(argA, argB, config) {
         this.id = 'actionEditor' + createIndex();
         this.tagName = {
             value: null,
@@ -80,7 +81,7 @@ class renderView{
         return console.log("loading view");
         //this function reqs actionEditor key from store and builds a ui. It also takes care of the output
     }
-    
+
     static insertInEditor(editor, input, insertRange) {
     // Find the current cursor position
     const startPos = textArea.selectionStart;
