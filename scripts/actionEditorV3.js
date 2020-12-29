@@ -2,14 +2,19 @@
  * model
  */
 class ActionEditorModel{
-    
+    constructor(name) {
+        this.id = 'actionEditor',
+            
+        
+    }
 }
  /**
  * Constroller :: listen and conduct action || event && View && Model 
  */
 
 class ActionEditorControl{
-    constructor(actionEditorView) { 
+    constructor(actionEditorView,actionEditorModel) {
+        this.actionEditorModel = actionEditorModel
         this.actionEditorView = actionEditorView
     }
     init() {
@@ -30,9 +35,11 @@ class ActionEditorControl{
  */
 class ActionEditorView { 
     init() {
-        console.log("render HTML here")
+        console.log(":)")
     }
 }
 const actionEditorView = new ActionEditorView();
-const actionEditorApp = new ActionEditorControl(actionEditorView);
+const actionEditorModel = new ActionEditorModel();
+
+const actionEditorApp = new ActionEditorControl(actionEditorView,actionEditorModel);
 actionEditorApp.init();
