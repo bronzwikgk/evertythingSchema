@@ -8,15 +8,47 @@ const index = createIndex();
 
 var actionEditor = {
     name : 'actionEditor',
+    htmlContent : '',
     tagName: 'div',
     nodeType : 1,
     attributes : {
         contentEditable: 'true',
-        draggable : 'true'
+        draggable : 'true',
+        spellcheck: true,
+        height: '15rem',
+        minHeight: '5rem',
+        placeholder: 'Enter text here...',
+        translate: 'no',
+        defaultParagraphSeparator: 'p',
+        defaultFontName: 'Arial'
     },
+    customClasses: [
+        {
+          name: "state",
+          class: "editable",
+        },
+        {
+          name: 'redText',
+          class: 'redText'
+        },
+        {
+          name: "titleText",
+          class: "titleText",
+          tag: "h1",
+        },
+      ],
     url: window.location.url,
-    parent:{},
+    parent:{
+        value : null,
+        operate : ['isNotEmpty'] 
+    },
+    selector: 'my-app',
+    templateUrl: './app.component.html',
+    storage:'localStorage'
+
 }
+
+
 // var appConfig = {
 //     appView: ehhApp.View.createElement('div'),
 //     name : 'ehhAppView'
@@ -27,45 +59,6 @@ var actionEditor = {
 // console.log(JSON.stringify(temp), temp)
 
 
-
-class Model1 {
-    constructor() {
-        // The state of the model, an array of todo objects, prepopulated with some data
-        this.todos = [
-            { id: 1, text: 'Run a marathon', complete: false },
-            { id: 2, text: 'Plant a garden', complete: false },
-        ]
-    }
-
-    addTodo(todoText) {
-        const todo = { 
-            id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
-            text: todoText,
-            complete: false,
-        }
-
-        this.todos.push(todo)
-    }
-
-    // Map through all todos, and replace the text of the todo with the specified id
-    editTodo(id, updatedText) {
-        this.todos = this.todos.map((todo) =>
-            todo.id === id ? { id: todo.id, text: updatedText, complete: todo.complete } : todo,
-        )
-    }
-
-    // Filter a todo out of the array by id
-    deleteTodo(id) {
-        this.todos = this.todos.filter((todo) => todo.id !== id)
-    }
-
-    // Flip the  boolean on an entity's requested PropertyKey. Entity is Identifiable by ID. For eg. State.Theme.Mode
-    toggleEntityProperty(entityId, propertyKey) {
-        //find the Entity by ID. 
-        //find the key
-    }
-}
-
 class Model {
     constructor() {
         this.entityCollection = [{
@@ -73,10 +66,8 @@ class Model {
            // content : input.content,
         }]
     }
-
     addEntity(entity) {
-        entity.id = this.entityCollection.id;
-        
+        entity.id = this.entityCollection.id; 
         this.entityCollection.push(entity);
         console.log(this);
 
@@ -118,14 +109,24 @@ class Controller {
         this.view = view
     }
     init() {
+        this.Controller.listener();
         this.View.render();
     }
+    listener(){
+        console.log(this);
+        //var body = document.getElementsByTagName('body')
+        var bodyListener = document.addEventListener('click',onClick);
+        console.log('listernerCreated',bodyListener)
+    }
+
 }
-
+function onClick(){
+    console.log("I was called")
+}
 const ehhApp = new Controller(new Model(), new View())
+ehhApp.view.render();
+ehhApp.listener();
 
-//ehhApp.init();
-ehhApp.View.init();
 input = document.createElement("div");
 
 //console.log(ehhApp.View.createElement("div"))
