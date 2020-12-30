@@ -44,7 +44,7 @@ class conductor {
 //this function calls a callback function with a and b parameter. Conducted Routes have to be registered before else will throw error.
   //  on param = [ anyEvent ]
     static conduct(a, b, callback,on) { 
-
+                callback(a,b)
 
     }
 }

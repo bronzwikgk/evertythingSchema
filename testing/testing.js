@@ -67,12 +67,9 @@ class ListView extends EventEmitter {
             .on('itemRemoved', () => this.rebuildList());
 
         // attach listeners to HTML controls
-        elements.list.addEventListener('change',
-            e => this.emit('listModified', e.target.selectedIndex));
-        elements.addButton.addEventListener('click',
-            () => this.emit('addButtonClicked'));
-        elements.delButton.addEventListener('click',
-            () => this.emit('delButtonClicked'));
+        elements.list.addEventListener('change', e => this.emit('listModified', e.target.selectedIndex));
+        elements.addButton.addEventListener('click',() => this.emit('addButtonClicked'));
+        elements.delButton.addEventListener('click',() => this.emit('delButtonClicked'));
     }
 
     show() {
