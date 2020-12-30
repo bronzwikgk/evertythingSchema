@@ -11,6 +11,11 @@ var addButton = {
     titleText: "[ Add ]",
     onclick : 'ehhApp.onClick()'
 }
+var ehhView = {
+    tagName: 'div',
+    role: 'ehhView',
+    id : 'ehhView'
+    }
 var actionEditor = {
     name : 'actionEditor',
     htmlContent : '',
@@ -72,15 +77,14 @@ var actionEditor = {
 class Model {
     constructor() {
         this.entityCollection = [{
-            id: 'entity - ' + index.next().value
-           // content : input.content,
+            id: 'entity - ' + index.next().value,
+       //     content: input.content, 
         }]
     }
     addEntity(entity) {
         entity.id = this.entityCollection.id; 
         this.entityCollection.push(entity);
         console.log(this);
-
     }
     deleteEntity(entityId) { 
         //find Entity. delete it.
@@ -121,9 +125,10 @@ class Controller {
      */
     create(input, output, callback,options) {
     //console.log(arguments)
-        if (operate.isEmpty(output)) return;// if there's no keys, then the call returns undefined
+        if (operate.isEmpty(output)) return console.error('output Cant be empty');
         switch (output) {
             case 'ehhHtml':
+                console.log(JSON.stringify(input))
                 var newEntity = document.createElement(input);
                 console.log(newEntity)
             case 'ehhListener':
