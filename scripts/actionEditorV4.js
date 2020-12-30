@@ -54,7 +54,7 @@ var actionEditor = {
     },
     selector: 'my-app',
   //  templateUrl: './app.component.html',
-    storage:'localStorage',
+    storage: 'localStorage',
     nonWordCharList : '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?-…',
     lineNumbers: true,
          mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
@@ -139,13 +139,14 @@ class Controller {
         return newEntity;
     }
     onAction(e) {
-        console.log(e.type);
+        console.log(typeof e,operate.is(e));
         switch (e.type) {
         }
         console.log("I was called")
         e.preventDefault();
     }
 }
+
 const ehhApp = new Controller(new Model(), new View())
 //ehhApp.view.render();
 window.onload = ehhApp.init();
