@@ -4,7 +4,9 @@ let inputNumer = 1;
 nonWordCharList = '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?-…';
 
 var inputA = ['html', 'richText', 'json', 'exe', 'css', 'javascript'];
+
 var inputB = ['html', 'richText', 'json', 'exe', 'css', 'javascript'];
+
 var inputStringA = "hello";
 var inputStringB = "hello";
 //output = operate.hasAllof(inputA, inputB);
