@@ -94,17 +94,10 @@ class View {
     }
 
     render() {
-
         console.log(":)")
-    }
-    // Create an element with an optional CSS class
-    createElement(tag, className) {
-        const element = document.createElement(tag)
-        if (className) element.classList.add(className)
-        return element
-    }
 
-    // Retrieve an element from the DOM
+    }
+     // Retrieve an element from the DOM
     getElement(selector) {
         const element = document.querySelector(selector)
         return element
@@ -118,7 +111,7 @@ class Controller {
         this.view = view
     }
     init() {
-      this.createListener();
+        this.create('click', 'ehhListener',this.onAction);
       //console.log(this);
       this.view.render();
     }
@@ -127,35 +120,28 @@ class Controller {
      * @param {*} input 
      * @param {*} output 
      */
-    static iterate(input, output,options) {
-
+    create(input, output, callback,options) {
+    //console.log(arguments)
         if (operate.isEmpty(output)) return;// if there's no keys, then the call returns undefined
         switch (output) {
-            case Object:
-                
-            case Array:
-                
-            case String:
-            
-            default:
-            
+            case 'ehhHtml':
+                var newEntity = document.createElement(input);
+                console.log(newEntity)
+            case 'ehhListener':
+                var newEntity = document.addEventListener(input, callback);
+             //   console.log('listernerCreated', operate.is(newEntity))    
+            default:   
         }
-        
-        return output;
+        return newEntity;
     }
-    createListener() {
-        var bodyListener = document.addEventListener('click',this.onClick);
-        console.log('listernerCreated',operate.is(bodyListener))
-    }
-    onClick(e){
+    onAction(e) {
+        console.log(e.type);
+        switch (e.type) {
+        }
         console.log("I was called")
         e.preventDefault();
-
     }
-
 }
-
-
 const ehhApp = new Controller(new Model(), new View())
 //ehhApp.view.render();
 window.onload = ehhApp.init();
