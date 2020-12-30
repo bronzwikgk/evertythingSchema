@@ -103,7 +103,6 @@ class View {
         return element
     }
 }
-
 class Controller {
     
     constructor(model, view) {
@@ -111,7 +110,7 @@ class Controller {
         this.view = view
     }
     init() {
-        this.create('click', 'ehhListener',this.onAction);
+     this.create('click', 'ehhListener',this.onAction);
       //console.log(this);
       this.view.render();
     }
