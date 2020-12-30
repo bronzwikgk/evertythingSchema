@@ -63,7 +63,14 @@ var actionEditor = {
          indentWithTabs: true
 
 }
+var ehhActionEditorView = {
+    id : 'ehhActionEditor',
+    tagName : 'div',
+    class:'userContent',
+    contentEditable: 'true',
+    nodeType:1
 
+}
 // var appConfig = {
 //     appView: ehhApp.View.createElement('div'),
 //     name : 'ehhAppView'
@@ -72,7 +79,6 @@ var actionEditor = {
 // temp.name = actionEditor.name;
 // temp.setAttribute('name', actionEditor.name);
 // console.log(JSON.stringify(temp), temp)
-
 
 class Model {
     constructor() {
