@@ -6,9 +6,10 @@ function* createIndex() {
 }
 const index = createIndex();
 var addButton = {
-    name : 'addActionEditor',
-    
-
+    name: 'addActionEditor',
+    type: 'button',
+    titleText: "[ Add ]",
+    onclick : 'ehhApp.onClick()'
 }
 var actionEditor = {
     name : 'actionEditor',
@@ -58,7 +59,6 @@ var actionEditor = {
 
 }
 
-
 // var appConfig = {
 //     appView: ehhApp.View.createElement('div'),
 //     name : 'ehhAppView'
@@ -94,6 +94,7 @@ class View {
     }
 
     render() {
+
         console.log(":)")
     }
     // Create an element with an optional CSS class
@@ -121,9 +122,30 @@ class Controller {
       //console.log(this);
       this.view.render();
     }
+    /**
+     * This method creates every kind of output object, matching the type of outputRequested
+     * @param {*} input 
+     * @param {*} output 
+     */
+    static iterate(input, output,options) {
+
+        if (operate.isEmpty(output)) return;// if there's no keys, then the call returns undefined
+        switch (output) {
+            case Object:
+                
+            case Array:
+                
+            case String:
+            
+            default:
+            
+        }
+        
+        return output;
+    }
     createListener() {
         var bodyListener = document.addEventListener('click',this.onClick);
-        console.log('listernerCreated',bodyListener)
+        console.log('listernerCreated',operate.is(bodyListener))
     }
     onClick(e){
         console.log("I was called")

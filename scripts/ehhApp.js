@@ -66,12 +66,10 @@ view = {
         addentity : function(event){
             if ((event.code == "Enter") || (event.code == "NumpadEnter")){
                 input = document.getElementById("add-entity");
-                if ((input.value != "") || (input.value != " ")){
-                    
+                if ((input.value != "") || (input.value != " ")){     
                     entityCollectionentity = {text : input.value, completed:false};
                     model.entitys.push(entityCollectionentity);
-                    document .getElementById("add-entity").value="";
-                    
+                    document.getElementById("add-entity").value="";
                 }
              }
              view.render();
