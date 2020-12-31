@@ -1,5 +1,16 @@
 
 
+const URL = "https://myhost/namespace/domain";
+
+const options = {
+    offline: {
+        storage: new IdbStorageAdapter()
+    }
+};
+
+const domain = new ConvergenceDomain(URL, options);
+
+
 
 
 class localStorageHelpers extends Entity { 

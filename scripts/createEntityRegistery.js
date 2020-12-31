@@ -1,23 +1,22 @@
 
-class entityRegistry {
+class EntityModel {
     constructor() {
-        this.items = new WeakSet();
+        this.objects = JSON.parse(localStorage.getItem('objects')) || new WeakSet();
     }
-
     addItem(entity) {
         if (this.hasItem(entity)) {
             throw new Error(
-                `The entity can only contain one instance of item ${item}`
+                `The entity can only contain one instance of item ${entity}`
             );
         }
-        return this.items.add(item);
+        return this.objects.add(entity);
     }
 
     removeItem(item) {
-        return this.items.delete(item);
+        return this.objects.delete(entity);
     }
 
     hasItem(item) {
-        return this.items.has(item);
+        return this.objects.has(entity);
     }
 };
