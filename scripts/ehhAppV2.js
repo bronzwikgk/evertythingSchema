@@ -40,13 +40,13 @@ class Store {
         return response;
     }
 
-    static setEntity(entity) {
+    static setEntity(entityContent,entityName) {
         const entitys = Store.getEntity();
         entitys.push(entity);
         localStorage.setItem('entity', JSON.stringify(entitys));
     }
 
-    static removeBook(id) {
+    static removeEntity(id) {
         const entitys = Store.getEntity();
 
         entitys.forEach((entity, index) => {
@@ -176,6 +176,7 @@ static resize(mm, newElement, startX, startY) {
 }
 
 }
+
 //https://github.com/philipwalton/router/blob/master/index.js
 class ehhEvent {
     // this function acts like a event conductor, read it's event command mapp from a json file.Ignore Events from Json to be implemented

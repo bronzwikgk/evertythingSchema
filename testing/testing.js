@@ -63,8 +63,7 @@ class ListView extends EventEmitter {
         this._elements = elements;
 
         // attach model listeners
-        model.on('itemAdded', () => this.rebuildList())
-            .on('itemRemoved', () => this.rebuildList());
+        model.on('itemAdded', () => this.rebuildList()).on('itemRemoved', () => this.rebuildList());
 
         // attach listeners to HTML controls
         elements.list.addEventListener('change', e => this.emit('listModified', e.target.selectedIndex));

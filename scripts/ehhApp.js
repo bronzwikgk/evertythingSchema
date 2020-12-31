@@ -54,11 +54,9 @@ view = {
                }
     
         }
-    }
-    
-    
+    }    
     // controller controls the directional request flow to the view and model
-    
+
     controller = {
         init : function(){
             view.render()
