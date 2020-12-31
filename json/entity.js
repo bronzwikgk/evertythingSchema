@@ -99,9 +99,7 @@ var slightlyComplex = {
 var toolbar = {
 
     "topNav": [
-        {
-            "button": "new"
-        },
+        { "button": "new" },
         { "button": "new2" },
         { "button": "new3" }
     ]
