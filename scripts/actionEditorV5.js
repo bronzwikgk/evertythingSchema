@@ -2,7 +2,7 @@
 
 class localStorageHelpers extends Entity { 
 
-    static save(entity, keyTitle) {
+    static save(keyTitle, entity) {
         // console.log("saving", keyTitle, JSON.stringify(entity));
         window.localStorage.setItem(keyTitle, JSON.stringify(entity));
         }
@@ -13,7 +13,8 @@ class localStorageHelpers extends Entity {
 class Entity{
     constructor(){
         this.save(config,"ehhAppConfig");
-}
+    }
+    
 }
 
 class Controller {
@@ -33,7 +34,6 @@ assign(input,key,value){
 }
 
 }
-
 
 class EhhView{
     constructor(){
