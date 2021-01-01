@@ -61,9 +61,9 @@ class Store {
 
 class localStorageHelpers { 
 
-static save(entity, keyTitle) {
+static save(entity, entityName) {
     // console.log("saving", keyTitle, JSON.stringify(entity));
-    window.localStorage.setItem(keyTitle, JSON.stringify(entity));
+    window.localStorage.setItem(entityName, JSON.stringify(entity));
     }
 }
 //ht

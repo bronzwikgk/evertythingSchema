@@ -147,11 +147,7 @@ const body = document.getElementsByTagName('body')[0];
 //console.log(body);
 
 const requestedKeys = ['attributes', 'tagName', 'childNodes', 'nodeType'];
-var options = {
-    recurse : true,
-    output : ['callback', 'returnValue', 'returnKey', 'returnAll', 'Boolean'],
-    returnValue : ['isNotEmpty', 'hasAllof', 'isString', 'isfunction', 'isBoolean']
-}
+
 
 
 

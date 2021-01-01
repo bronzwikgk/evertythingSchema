@@ -68,17 +68,7 @@ class Controller {
         e.preventDefault();
     }
 
-extend(input,extension,options){
 
-    for(var key in extension){
-        input[key] = extension[key];
-
-    }
-
-}
-assign(input,key,value){
-    input.assign(key,value);
-}
 
 }
 
