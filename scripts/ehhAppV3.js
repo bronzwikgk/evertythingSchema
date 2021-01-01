@@ -1,9 +1,4 @@
-class EntityModel{
-    constructor() {
-        this.entitys = JSON.parse(localStorage.getItem('entitys')) || new WeakSet();
-    }
-    
-}
+
 // Store Class: Handles Storage
 class Store {
     static getEntity(entity) {
@@ -66,7 +61,10 @@ class process {
         return newEntity;
     }
     append(input, output, key, value) {
-      
+
+        a = operate.is(input);
+        command = typeofEntity.a[this.append];
+      command(input)
         if(operate.isEmpty(output) || operate.isEmpty(input)) return console.error('output Cant be empty');
 
         if (operate.is(input).includes("HTML")) {
@@ -108,9 +106,4 @@ class Controller {
     }
 }
 
-
-objType = operate.is();
-
-append(objType, input, output){ 
-    
-}
+s

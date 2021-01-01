@@ -139,8 +139,8 @@ class operate {
 
 
 
-inputElement = document.createElement("div");
+
 //console.log(isInRange)
-output = operate.isHTML(inputElement, inputB);
+//output = operate.isHTML(inputElement, inputB);
 //console.log(output);
 //console.log(inputElement)

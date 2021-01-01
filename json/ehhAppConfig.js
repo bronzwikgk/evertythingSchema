@@ -1,45 +1,37 @@
 const typeofDocuments = {
-    
-}
-const typeofEntity = {
-    htmlElement = {
-        methods: {
-            createElement = parent.createElement(),
-            appendElement = parent.appendChild(),
-            getElementById =  parent.getElementById(),
-            getElementAttribute = parent.getAttribute(),
 
+}
+
+const ModelEntitytype = {
+    htmlElement: {
+        methods: {
+            createElement: parent.createElement,
+            appendElement: parent.appendChild,
+            getElementById: parent.getElementById,
+            getElementAttribute: parent.getAttribute,
+            'objectType': 'operate.is',
         },
         attributes: {
             contentEditable: Boolean,
             
         },
         class: {},
-        childNodes,
-}
+        'childNodes'
+    },
+    object: {
+        method: {
+            create: Object.create,
+            compare: Object.is,
+            objectType: operate.is,
+            assignMerge: Object.assign,
+            hasProperty: this.hasOwnProperty('propertyToFind')
+        }
 
-
-
-}
-const storageOptions = {
-    resource: {
-        storage: 'window.localStorage'
     }
-};
 
 
-var entityOptions = {
-    recurse: true,
-    output: ['callback', 'returnValue', 'returnKey', 'returnAll', 'Boolean'],
-    returnValueFilters: ['isNotEmpty', 'hasAllof', 'isString', 'isfunction', 'isBoolean']
+
 }
+
 
  
-var createCommand = {
-    filter: {
-        html: 'parent.createElement()',
-        Array: 'new Array()',
-        Object: 'new Object()',
-    },
-    operate: [is, includes]
-}

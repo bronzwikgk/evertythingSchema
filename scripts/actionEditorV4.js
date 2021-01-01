@@ -1,10 +1,4 @@
-// This creates an index which when called with sytax of createIndex.next().value will give you an index new value.
-function* createIndex() {
-    let number = 1;
-    while (true)
-        yield number++;
-}
-const index = createIndex();
+
 var addButton = {
     name: 'addActionEditor',
     type: 'button',
