@@ -65,50 +65,25 @@ class process {
         }
         return newEntity;
     }
-    setAppend(input, output, callback, options) {
-        //console.log(arguments)
-        if (operate.isEmpty(output) || operate.isEmpty(input)) return console.error('output Cant be empty');
-
-        switch (operate.is(output).includes("HTML")) {
-            case 'ehhHtml':
-                console.log(JSON.stringify(input))
-                var newEntity = document.createElement(input);
-                console.log(newEntity)
-            case 'ehhListener':
-                var newEntity = document.addEventListener(input, callback);
-            //   console.log('listernerCreated', operate.is(newEntity))    
-            case 'Array':
-                var newEntity = new Array(input);
-            case 'object':
-                var newEntity = new Object(input);
-            default:
-        }
-        return newEntity;
-    }
-    static append(input, output, key, value) {
+    append(input, output, key, value) {
+      
+        if(operate.isEmpty(output) || operate.isEmpty(input)) return console.error('output Cant be empty');
 
         if (getEntityType(output).includes("HTML")) {
 
-            if (getEntityType(input).includes("HTML") && typeof value !== 'string') {
+            if (operate.is(input).includes("HTML") && typeof value !== 'string') {
                 output.appendChild(input);
             }
-            if (getEntityType(input).includes("String") && typeof value !== 'string') {
-                //   output.appendChild(currentNode);
+            if (operate.is(input).includes('bject') && typeof value !== 'object') {
+                assign(input, key, value) { return input.assign(key, value)?.input[key] ?? throw new Error("key not found in input"); }
+            }
+            if (operate.is(input).operate.isEqualStrict(input, Array)) {
+                output.push[input];
             }
         }
     }
     
-    extend(input, extension, options) {
-
-        for (var key in extension) {
-            input[key] = extension[key];
-
-        }
-
-    }
-    assign(input, key, value) {
-        input.assign(key, value);
-    }
+    
 
 }
 

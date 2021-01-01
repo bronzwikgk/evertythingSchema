@@ -105,11 +105,10 @@ var toolbar = {
     ]
 }
 
-var a = {
-    div: {
+var div = {
+    'nodeType':1,
         'class': "preference",
         "label": "do you like cheese",
         'type': "checkBox"
     }
 
-}
