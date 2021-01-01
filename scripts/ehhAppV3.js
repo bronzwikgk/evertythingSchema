@@ -69,22 +69,21 @@ class process {
       
         if(operate.isEmpty(output) || operate.isEmpty(input)) return console.error('output Cant be empty');
 
-        if (getEntityType(output).includes("HTML")) {
+        if (operate.is(input).includes("HTML")) {
 
             if (operate.is(input).includes("HTML") && typeof value !== 'string') {
                 output.appendChild(input);
             }
-            if (operate.is(input).includes('bject') && typeof value !== 'object') {
-                assign(input, key, value) { return input.assign(key, value)?.input[key] ?? throw new Error("key not found in input"); }
-            }
-            if (operate.is(input).operate.isEqualStrict(input, Array)) {
-                output.push[input];
-            }
+            
+           
+        }
+        if (operate.is(output).includes('bject') && typeof value !== 'object') {
+            assign(input, key, value) { return input.assign(key, value)?.input[key] ?? throw new Error("key not found in input"); }
+        }
+        if (operate.is(output).operate.isEqualStrict(input, Array)) {
+            output.push[input];
         }
     }
-    
-    
-
 }
 
 
@@ -107,4 +106,11 @@ class Controller {
         console.log("I was called")
         e.preventDefault();
     }
+}
+
+
+objType = operate.is();
+
+append(objType, input, output){ 
+    
 }
