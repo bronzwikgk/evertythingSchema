@@ -145,7 +145,7 @@ class dataHelper {
 const raw = { item1: { prop: '1' }, item2: { prop: '2' }, item3: { prop: '3' } };
 //console.log(body);
 
-const requestedKeys = ['attributes', 'tagName', 'childNodes', 'nodeType'];
+
 
 
 

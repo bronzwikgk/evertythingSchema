@@ -20,6 +20,13 @@ const storageOptions = {
     }
 };
 
+const requestedKeys = ['attributes', 'tagName', 'childNodes', 'nodeType'];
+const request = {
+    resource: {
+        value: ['dom', 'localStorage', 'http'],
+        operate:['isIn']
+    }
+}
 
 var entity = {
     entityName: 'name',
@@ -65,10 +72,25 @@ var entityTypes = {
 
 class EntityModel {
     constructor() {
-        this.entitys = JSON.parse(localStorage.getItem('entitys')) || new WeakMap();
+        this.objects = JSON.parse(localStorage.getItem('objects')) || new WeakSet();
+    }
+    addItem(entity) {
+        if (this.hasItem(entity)) {
+            throw new Error(
+                `The entity can only contain one instance of item ${entity}`
+            );
+        }
+        return this.objects.add(entity);
     }
 
-}
+    removeItem(item) {
+        return this.objects.delete(entity);
+    }
+
+    hasItem(item) {
+        return this.objects.has(entity);
+    }
+};
 class Ehhcontroller { 
     constructor(EntityModel,EhhView) { 
         this.EntityModel = EntityModel
@@ -76,7 +98,19 @@ class Ehhcontroller {
     }
     init({ ...Arg }) {
         console.log(this)
-        console.log(operate.isNotEmpty([arguments]), arguments.length)
+        // init_workflow = {
+        //     workFlowIndexGenerator: createIndex(),
+        //     workFlowType: 'serial_Indexed',
+        //     workFlowName: 'init',
+        //     // workFlowSteps: {
+        //     //    //index: workFlowIndexGenerator.next().value(),
+        //     //    'operate.isNotEmpty(arguments).next'
+        //     // }
+
+        // }
+      var a =  operate.isNotEmpty(arguments)
+      console.log(a)
+        
       //  operate.isNotEmpty([arguments]).console.log();
 
       //  this.EhhView.render();
