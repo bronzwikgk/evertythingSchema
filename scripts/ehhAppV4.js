@@ -27,6 +27,9 @@ var entity = {
         value: operate.is,
         operate: [operate.isNotEmpty]
     },
+    required: {
+        value: operate.isEqualStrict(operate.is, 'Boolean')
+    },
     entityCreate: {
         callback : 'entityMethods[operate.is].create'
     },
@@ -34,14 +37,23 @@ var entity = {
         create: null,
         append: null, 
         get: null,
-        delete:null,
+        delete: null
+     //   deepClone:'JSON.parse(JSON.stringify)'
     },
     entityOptions: {
         recurse: true,
         output: ['callback', 'returnValue', 'returnKey', 'returnAll', 'Boolean'],
         returnValueFilters: ['isNotEmpty', 'hasAllof', 'isString', 'isfunction', 'isBoolean']
     },
-    entityStorage:'window.localStorage'
+    entityStorage: 'window.localStorage',
+    state: {
+        inactive: {
+            on: { TOGGLE: "active" }
+        },
+        active: {
+            on: { TOGGLE: "inactive" }
+        }
+    }
 }
 
 var entityTypes = {
@@ -65,8 +77,9 @@ class Ehhcontroller {
     init({ ...Arg }) {
         console.log(this)
         console.log(operate.isNotEmpty([arguments]), arguments.length)
-        operate.isNotEmpty([arguments]) ? { (arguments.forEach(element => { this.entitys.append(arguments); }))};
-        this.EhhView.render();
+      //  operate.isNotEmpty([arguments]).console.log();
+
+      //  this.EhhView.render();
     }
     create() {
 
