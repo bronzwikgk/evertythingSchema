@@ -47,6 +47,11 @@ class conductor {
                 callback(a,b)
 
     }
+    
+    static conductForEachFlow(a, b, options) {
+        
+
+    }
 }
 class operator { 
     //    //arr.every(callback(element[, index[, array]])[, thisArg])
