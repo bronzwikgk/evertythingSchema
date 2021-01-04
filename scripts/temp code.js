@@ -72,7 +72,7 @@ class operator {
     constructor(operator, ifTrueCallBack, ifFalseCallback) {
         this.defaultOperation = operate.is(isArray, input, options.output.ifTrueCallback('continue'))
         this.OperationSetName = Operation.name,
-            this.Operation = this.operate.typeofOperation(input, options);
+        this.Operation = this.operate.typeofOperation(input, options);
         this.actionIfTrue = ifTrueCallback;
         this.actionIfFalse = ifFalseCallback(...arguments,);
         this.options = { autoStart = true }

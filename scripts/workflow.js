@@ -614,7 +614,6 @@ function getNamedRangeState(SheetID, Namedrange) {
             return true;
         }
     })
-
     return state
 
 }

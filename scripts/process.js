@@ -129,7 +129,9 @@ class process {
 //this function finds a key inside an object. Not recursivly.
 
 class dataHelper { 
-    static unique() { }
+    static unique() {
+        
+     }
     
     static conduct(callback, trigger, a, b) {
         callback.call(a, b);
