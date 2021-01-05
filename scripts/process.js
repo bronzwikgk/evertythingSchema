@@ -33,11 +33,11 @@ class process {
         if (!Object.keys(input).length) return;// if there's no keys, then the call returns undefined
         switch (input?.constructor) {
             case Object:
-                processSchema.iterateObj(input, output, key, value);
+                processSchema.iterateObj(input, output, key, value,callback);
             case Array:
-                processSchema.iterateArr(input, output, key, value);
+                processSchema.iterateArr(input, output, key, value, callback);
             case String:
-            //processSchema.processString(input, output);
+                processSchema.processString(input, output, callback);
             default:
             // return
         }
