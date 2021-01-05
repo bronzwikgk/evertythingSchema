@@ -1,36 +1,4 @@
 
-// /**
-//  * 
-//  * 
-//  */
-// class actionEditor1{
-//     constructor(parent) {
-//         this.id = 'actionEditor' + createIndex();
-//         this.name = "actionEditor",
-//         this.style = style,
-//         this.attributes = attributes,
-//         this.nonWordCharList = '/\\()"\':,.;<>~!@#$%^&*|+=[]{}`?-…',
-//         this.parent = parent,
-//         this.url = document.location.url,
-// this.accepts = [{ 
-//  mimeTypes: ['text/*'],
-//    extensions: ['js', 'css', 'txt', 'html', 'xml', 'tsv', 'csv', 'rtf']
-//    }];
-//         this.textBuffer = { point, range },
-//         this.options = {
-//         autofocus: true,
-//         lineNumbers: true,
-//         mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
-//         this.output : ['self','output'],
-//         tabSize: 2,
-//         indentWithTabs: true
-//         };
-
-//     }
-
-
-
-// }
 class entityRegistry {
     constructor() {
         this.items = new WeakSet();
