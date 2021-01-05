@@ -37,25 +37,7 @@ function add(x = requiredArg(), y = requiredArg()) {
 console.log(add);
 
 
-const unqueArray = Array.from(new Set("input"));
 
-const items = [1, false, "Devsage", 3.14]
-
-//const items = Infinity;
-class Iterator {
-    constructor(Array) { this.Array = Array, this.index = 0 }
-    hasNext() { console.log(this.Array); return this.index < this.Array.length }
-    next() { return this.Array[this.index++] }
-}
-
-// const iter = new Iterator(items)
-// console.log(items)
-// console.log(iter.hasNext())
-
-// while(iter.hasNext())
-//   console.log(iter.next())
-
-// console.log(iter.hasNext())
 
 
 

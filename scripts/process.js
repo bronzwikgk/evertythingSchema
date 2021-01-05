@@ -130,7 +130,7 @@ class process {
 
 class dataHelper { 
     static unique() {
-        
+        const unqueArray = Array.from(new Set("input")); 
      }
     
     static conduct(callback, trigger, a, b) {
