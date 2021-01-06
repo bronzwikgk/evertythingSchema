@@ -23,3 +23,10 @@ function deepMerge(target, source) {
     }
     return target;
 }
+
+
+function setStyle(objId, propertyObject) {
+    var elem = document.getElementById(objId);
+    for (var property in propertyObject)
+        elem.style[property] = propertyObject[property];
+}
