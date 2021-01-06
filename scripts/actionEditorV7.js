@@ -17,10 +17,12 @@ var actionEditor = {
         state: 'idle',
         style: 'min-height : 200px; width: 400px; border-top: 0px; padding: 21px; overflow: auto;',
         },
-        toolbar:{
-            id: ' toolBar' + index.next().value,
-            enums:[]
-
+        toolbar : {
+            "topNav": [
+                { "button": "new" },
+                { "button": "new2" },
+                { "button": "new3" }
+            ]
         }
 }
 
@@ -96,7 +98,7 @@ class process {
     static iterateObj(input, output, key, value, callback, callbackClass) { 
         
         for (var key in input){ 
-            console.log("found", key, input[key],typeof input[key]);
+         //   console.log("found", key, input[key],typeof input[key]);
             if (operate.is(input[key]) === 'Object') {
                 var buffer = entity.create(key,output,key,input[key]);
                 process.iterateObj(input[key],buffer,key,input[key])
@@ -104,6 +106,10 @@ class process {
                 //console.log("appended Object",buffer,output)
             } else if (operate.is(input[key]) === 'Array') {
                 console.log("found Array", key, input[key])
+                var buffer = entity.create(key,output,key,input[key]);
+                process.iterateArr(input[key],buffer,key,input[key])
+                entity.append(buffer,output);
+
             } else if (operate.is(input[key]) == 'String' || operate.is(input[key]) == 'Boolean' ) {
               //  console.log("found property", key, input[key],typeof input[key])
                 entity.set(input,output,key,input[key])
@@ -111,8 +117,7 @@ class process {
             //console.log(callbackClass,callback)
             //   console.log(key, input[key])
             //var response = operate.isNotEmpty(callback) ? conductor.conduct(input, output, key, input[key], callback, callbackClass) : null;
-            if (operate.isNotEmpty(callback)) { 
-
+            if (operate.isNotEmpty(callback)) {
                 var response = conductor.conduct(input, output, key, input[key], callback, callbackClass);
               
             }
@@ -121,13 +126,19 @@ class process {
         return response;
     }
     static iterateArr(input, output, key, value, callback, callbackClass) { 
-        
-        for (var i = 0; i < input.length; i++){ 
+        console.log("Iterating Array", input, output, key, value, callback, callbackClass);
+
+        for (var i = 0; i < input.length; i++){
+
             if (operate.is(input[i]) === 'Object') {
                 console.log("Object found in array", input[i]);
-            } else if (operate.is(input[key]) === 'Array') {
+                var buffer = entity.create(input[i].name,output,key,value);
+                process.iterateObj(input[i],buffer,key,value)
+                entity.append(buffer,output);
+
+            } else if (operate.is(input[i]) === 'Array') {
                 console.log("found Array", key, input[key])
-            } else if (operate.is(input[key]) == 'String') {
+            } else if (operate.is(input[i]) == 'String') {
               //  console.log("found property, Set Attributes in output", key, input[key])
              //   entity.set(input,output,key,input[key])
             } else {
@@ -224,12 +235,48 @@ tempOut = document.createElement('div', { id: "tempOut" })
 
 
 function test(){
-b = process.iterateObj(actionEditor,tempOut);
+b = process.iterateObj(inputObjA,tempOut);
 document.getElementsByTagName('body')[0].appendChild(tempOut);
 console.log(tempOut)
 }
 
 
+var inputObjA = {
+    "schema": {
+        "field": {
+            "input": "string",
+            "lable": "A field"
+        }
+    },
+    "form": [
+        {
+            "key": "field"
+        },
+        {
+            "button": "submit",
+            "lable": "Submit"
+        }
+    ]
+}
+
+
+var inputObjB = {
+    "schema": {
+        "field": {
+            "input": "string",
+            "lable": "A field"
+        }
+    },
+    "form": [
+        {
+            "key": "field"
+        },
+        {
+            "button": "submit",
+            "lable": "Submit"
+        }
+    ]
+}
 
 
 test();
