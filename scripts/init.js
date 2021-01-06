@@ -4,7 +4,7 @@ tempOut = document.createElement('div', { id: "tempOut" })
 
 
 function test(){
-b = process.iterateObj(schema,tempOut);
+b = process.iterateObj(actionEditor,tempOut);
 document.getElementsByTagName('body')[0].appendChild(tempOut);
 console.log(tempOut)
 }

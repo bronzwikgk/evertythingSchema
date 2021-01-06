@@ -12,17 +12,10 @@ var actionEditor = {
         class : 'actionEditor',
         id: 'actionEditor' + index.next().value,
         lineNumbers: true,
-        mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
-        output: ['self', 'output'],
+        //mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
+        //output: ['self', 'output'],
         state: 'idle',
         style: 'min-height : 200px; width: 400px; border-top: 0px; padding: 21px; overflow: auto;',
-        },
-        toolbar : {
-            "topNav": [
-                { "button": "new" },
-                { "button": "new2" },
-                { "button": "new3" }
-            ]
         }
 }
 
@@ -140,7 +133,7 @@ class process {
                 console.log("found Array", key, input[key])
             } else if (operate.is(input[i]) == 'String') {
               //  console.log("found property, Set Attributes in output", key, input[key])
-             //   entity.set(input,output,key,input[key])
+                entity.set(input,output,key,input[key])
             } else {
 
                 console.log("stray found")

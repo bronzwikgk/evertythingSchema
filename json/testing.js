@@ -8,11 +8,12 @@ var schema = {
     'Gender': {
         "title": "Gender",
         "description": "Your gender",
-        "type": "input",
-        "options": [
-            "male",
-            "female",
-            "alien"
+        "type": "text",
+        //'value':"welcome",
+        "select": [
+            {value:"male"},
+            {vaue:"female"},
+            {value:"alien"}
         ]
     }
 }
