@@ -12,6 +12,7 @@ var actionEditor = {
         class : 'actionEditor',
         id: 'actionEditor' + index.next().value,
         lineNumbers: true,
+        innerText:"Write whatever you can think of...",
         //mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
         //output: ['self', 'output'],
         state: 'idle',
@@ -53,12 +54,18 @@ class entity {
     }
     static set(input, output, key, value, callback, callbackClass) {
         if (operate.is(output).includes("HTML")) { //Only HTML creation
-           //console.log("setting",key, value,"in",output)
-           var prop = {key,value};
-            //Object.assign(output,prop);
-            output.setAttribute(key, value);
+           console.log("setting",key, value,"in",output)
+           if(operate.isIn(key,htmlAttributesList)){
+            output.setAttribute(key,value)
+           } else {
+
+            var buffer = output;
+            buffer[key] = input[key];
+            buffer=output;
+
+           }
+           
         }
-       // console.log('attribute Set', output)
         return output;
     }
 

@@ -89,3 +89,6 @@ var inputObjB = {
         }
     ]
 }
+
+
+var htmlAttributesList = [ 'lineNumbers', 'class' ]
