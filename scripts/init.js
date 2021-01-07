@@ -4,9 +4,13 @@ tempOut = document.createElement('div', { id: "tempOut" })
 
 
 function test(){
-b = process.iterateObj(actionEditor,tempOut);
-document.getElementsByTagName('body')[0].appendChild(tempOut);
-console.log(tempOut)
+ehhApp = document.createElement('ehhOutput');
+
+//b = process.iterateObj(actionEditor,tempOut);
+b = new Creator(actionEditor.actionEditor,ehhApp);
+console.log(b)
+document.getElementsByTagName('body')[0].appendChild(ehhApp);
+console.log(ehhApp)
 }
 
 
@@ -16,7 +20,7 @@ test();
 
 
 
-ehhApp = document.createElement('ehhOutput');
+
 
 //window.onload = process.init(actionEditor,ehhApp,'','','append',entity);
 //document.getElementsByTagName('body')[0].appendChild(ehhApp);

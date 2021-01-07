@@ -7,26 +7,54 @@ function* createIndex() {
 const index = createIndex();
 
 var actionEditor = {
-    div:{
+    actionEditor:{
+        name:'div',
         contentEditable: true,
         class : 'actionEditor',
-        id: 'actionEditor' + index.next().value,
+        id: 'actionEditor',
         lineNumbers: true,
         innerText:"Write whatever you can think of...",
         //mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
         //output: ['self', 'output'],
         state: 'idle',
         style: 'min-height : 200px; width: 400px; border-top: 0px; padding: 21px; overflow: auto;',
-        }
+        },
+    toolBar:[
+        {   name:'button',
+            type: 'div',
+            'innerText':'BTN',
+            'onclick' : 'console.log("i was clicked")'
+        },
+        {   name:'button',
+            type: 'div',
+            'innerText':'BTN',
+            'onclick' : 'console.log("i was clicked")'
+        },
+        {   name:'button',
+            type: 'button',
+            'innerText':'BTN',
+            'onclick' : 'console.log("i was clicked")'
+        },
+        {   name:'button',
+            type: 'button',
+            'innerText':'BTN',
+            'onclick' : 'console.log("i was clicked")'
+        },
+        {   name:'button',
+            type: 'button',
+            'innerText':'BTN',
+            'onclick' : 'console.log("i was clicked")'
+        },
+        
+    ]
 }
 
 class entity {
     static create(input, output, key, value,callback,callbackClass) {
         if (operate.is(output).includes("HTML")) { //Only HTML creation
-           
-            var response = document.createElement(input);
-             //console.log("create request for ",response)
-            entity.set(input, response, 'id', input + index.next().value);
+            // console.log("create request for ",input[key].name)
+            var response = document.createElement(key);
+            entity.set(input, response, 'id', key + index.next().value);
         }
        // console.log('created', response, input, output, key, value, callback, callbackClass);
 
@@ -47,28 +75,28 @@ class entity {
         if (operate.is(output).includes("HTML")) { //Only HTML creation
             var response = output.appendChild(input);
         }
-//
+
 
    // console.log('appended',response)
         return response;
     }
     static set(input, output, key, value, callback, callbackClass) {
         if (operate.is(output).includes("HTML")) { //Only HTML creation
-           console.log("setting",key, value,"in",output)
+          //console.log("setting",key, value,"in",output)
            if(operate.isIn(key,htmlAttributesList)){
+           // console.log("setting",key, value,"in",output)
             output.setAttribute(key,value)
+            //console.log(output);
            } else {
-
-            var buffer = output;
-            buffer[key] = input[key];
-            buffer=output;
+            //var buffer = output;
+            output[key] = input[key];
+            //buffer=output;
 
            }
            
         }
         return output;
     }
-
 }
 
 class conductor {
@@ -100,12 +128,16 @@ class process {
         for (var key in input){ 
          //   console.log("found", key, input[key],typeof input[key]);
             if (operate.is(input[key]) === 'Object') {
-                var buffer = entity.create(key,output,key,input[key]);
+
+                // is not empty;
+
+                console.log(input,key,input[key])
+                var buffer = entity.create(input,output,input[key]?.name??key,input[key]);
                 process.iterateObj(input[key],buffer,key,input[key])
                 entity.append(buffer,output);
                 //console.log("appended Object",buffer,output)
             } else if (operate.is(input[key]) === 'Array') {
-                console.log("found Array", key, input[key])
+              //  console.log("found Array", key, input[key])
                 var buffer = entity.create(key,output,key,input[key]);
                 process.iterateArr(input[key],buffer,key,input[key])
                 entity.append(buffer,output);
@@ -119,7 +151,6 @@ class process {
             //var response = operate.isNotEmpty(callback) ? conductor.conduct(input, output, key, input[key], callback, callbackClass) : null;
             if (operate.isNotEmpty(callback)) {
                 var response = conductor.conduct(input, output, key, input[key], callback, callbackClass);
-              
             }
         }
       //  console.log("iterator respon", response);
@@ -131,8 +162,8 @@ class process {
         for (var i = 0; i < input.length; i++){
 
             if (operate.is(input[i]) === 'Object') {
-                console.log("Object found in array", input[i]);
-                var buffer = entity.create(input[i].name,output,key,value);
+                console.log("Object found in array", input[i].name);
+                var buffer = entity.create(input[i],output,input[i].name,value);
                 process.iterateObj(input[i],buffer,key,value)
                 entity.append(buffer,output);
 
@@ -179,6 +210,28 @@ class process {
         console.log(buffer)
        // console.log("response",response)
        return response;
+    }
+
+
+}
+
+class Creator{
+    constructor(input,output){
+       // console.log(input,output);
+        this.output = entity.create(input,output,input?.name??'key');
+        console.log(this.output)
+        this.output.id = input.id + index.next().value;
+        //getAttributes
+        Object.entries(input).forEach(entry => {
+            const [key, value] = entry;
+            entity.set(input,output,key,value)            
+           // console.log(key, value);
+         //  check if property is an Object, send for recursion.
+        });
+
+        entity.append(this.output,output);
+
+
     }
 
 
