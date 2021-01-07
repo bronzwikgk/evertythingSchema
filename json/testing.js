@@ -27,10 +27,10 @@ var requestEntity = {
 }
 
 var request = {
-    input: requestEntity,
+    input: 'requestEntity',
     output: document.getElementsByTagName('body')[0],
     callback: 'create',
-    callbackClass: entity
+    callbackClass: 'entity'
 }
 
 

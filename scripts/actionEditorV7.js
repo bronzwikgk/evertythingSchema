@@ -49,12 +49,31 @@ var actionEditor = {
     ]
 }
 
-class entity {
+class Entity {
+    constructor(input,output,key,value){
+        // console.log(input,output);
+          this.entity = entity.create(input,output,key);
+          console.log(this.entity)
+          this.entity.id = input.id + index.next().value;
+          //getAttributes
+        //   Object.entries(input).forEach(entry => { const [key, value] = entry;
+        //       entity.set(input,this.entity,key,value);           
+        //      // console.log(key, value);
+        //    //  check if property is an Object, send for recursion.
+        //   });
+
+        //   entity.append(this.entity,output);
+      }
+
     static create(input, output, key, value,callback,callbackClass) {
+      
         if (operate.is(output).includes("HTML")) { //Only HTML creation
             // console.log("create request for ",input[key].name)
             var response = document.createElement(key);
-            entity.set(input, response, 'id', key + index.next().value);
+            if(value){
+                process.iterateObj(value,response,key,value)
+            }
+           // entity.set(input, response, 'id', key + index.next().value);
         }
        // console.log('created', response, input, output, key, value, callback, callbackClass);
 
@@ -128,23 +147,20 @@ class process {
         for (var key in input){ 
          //   console.log("found", key, input[key],typeof input[key]);
             if (operate.is(input[key]) === 'Object') {
-
-                // is not empty;
-
                 console.log(input,key,input[key])
-                var buffer = entity.create(input,output,input[key]?.name??key,input[key]);
-                process.iterateObj(input[key],buffer,key,input[key])
+                var buffer = new Entity(input,output,input[key]?.name??key,input[key]);
+               // process.iterateObj(input[key],buffer,key,input[key])
                 entity.append(buffer,output);
                 //console.log("appended Object",buffer,output)
             } else if (operate.is(input[key]) === 'Array') {
               //  console.log("found Array", key, input[key])
-                var buffer = entity.create(key,output,key,input[key]);
+                var buffer = new Entity(key,output,key,input[key]);
                 process.iterateArr(input[key],buffer,key,input[key])
                 entity.append(buffer,output);
 
             } else if (operate.is(input[key]) == 'String' || operate.is(input[key]) == 'Boolean' ) {
               //  console.log("found property", key, input[key],typeof input[key])
-                entity.set(input,output,key,input[key])
+                Entity.set(input,output,key,input[key])
             }
             //console.log(callbackClass,callback)
             //   console.log(key, input[key])
@@ -215,21 +231,5 @@ class process {
 
 }
 
-class Creator{
-    constructor(input,output){
-       console.log(input,output);
-        this.entity = entity.create(input,output,input?.name??'key');
-        console.log(this.entity)
-        this.entity.id = input.id + index.next().value;
-        //getAttributes
-        Object.entries(input).forEach(entry => {
-            const [key, value] = entry;
-            entity.set(input,this.entity,key,value)            
-           // console.log(key, value);
-         //  check if property is an Object, send for recursion.
-        });
-        entity.append(this.entity,output);
-    }
-}
 
 
