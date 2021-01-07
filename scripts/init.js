@@ -13,8 +13,6 @@ document.getElementsByTagName('body')[0].appendChild(ehhApp);
 console.log(ehhApp)
 }
 
-
-
 test();
 
 
