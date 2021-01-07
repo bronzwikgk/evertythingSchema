@@ -65,8 +65,6 @@ class EventEmitter {
     }
 }
 
-
-
 class Entity extends EventEmitter {  
     constructor(input,output,key,value){
         super();
@@ -93,7 +91,6 @@ class Entity extends EventEmitter {
 
         //   entity.append(this.entity,output);
       }
-
     static create(input, output, key, value,callback,callbackClass) {
       
         if (operate.is(output).includes("HTML")) { //Only HTML creation
@@ -270,15 +267,49 @@ class EhhVew extends Entity{
         this.input = input,
         this.entityView = new Entity(input,output);
         console.log(this.entityView.entity);
-        //var b = document.getElementsByTagName('ehhOutput')[0]
         this.entityView.entity.addEventListener('keydown', e => this.emit(e));
-        
         //  model.on('itemAdded', () => this.rebuildList()).on('itemRemoved', () => this.rebuildList());
        // elements.list.addEventListener('change', e => this.emit('listModified', e.target.selectedIndex));
        // console.log(this.entityView)
     }
     
 }
+
+
+/**
+ * The Controller. Controller responds to user actions and
+ * invokes changes on the model.
+ */
+class EntityController {
+    constructor(model, view) {
+        this._model = model;
+        this._view = view;
+        view.on('listModified', idx => this.updateSelected(idx));
+        view.on('addButtonClicked', () => this.addEntity());
+        view.on('delButtonClicked', () => this.delEntity());
+    }
+
+    addEntity() {
+        const entity = window.prompt('Add Entity:', '');
+        if (entity) {
+            this._model.addEntity(entity);
+        }
+    }
+
+    delEntity() {
+        const index = this._model.selectedIndex;
+        if (index !== -1) {
+            this._model.removeEntityAt(index);
+        }
+    }
+
+    updateSelected(index) {
+        this._model.selectedIndex = index;
+    }
+}
+
+
+
 
 
 
@@ -288,10 +319,12 @@ window.onload = init();
 
 function init(){
 
-    ehhApp = document.createElement('ehhOutput');
+    ehhAppOutput = document.createElement('ehhOutput');
     ehhAppView = new EhhVew(actionEditor,ehhApp);
+    ehhAppModel = new Entity(actionEditor);
+    var ehhApp = new Controller(ehhAppModel,ehhAppView);
 
-    document.getElementsByTagName('body')[0].appendChild(ehhApp);
+    document.getElementsByTagName('body')[0].appendChild(ehhAppOutput);
 }
 
 
