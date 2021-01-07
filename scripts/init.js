@@ -4,11 +4,12 @@ tempOut = document.createElement('div', { id: "tempOut" })
 
 
 function test(){
-ehhApp = document.createElement('ehhOutput');
 
-b = process.iterateObj(actionEditor.actionEditor,tempOut);
-//b = new Creator(actionEditor.actionEditor,ehhApp);
-console.log(b)
+ehhApp = document.createElement('ehhOutput');
+console.log("hello")
+// b = process.iterateObj(actionEditor,tempOut);
+// //b = new Creator(actionEditor.actionEditor,ehhApp);
+// console.log(b)
 document.getElementsByTagName('body')[0].appendChild(ehhApp);
 console.log(ehhApp)
 }

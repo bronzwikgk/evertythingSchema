@@ -7,11 +7,11 @@ function* createIndex() {
 const index = createIndex();
 
 var actionEditor = {
-    actionEditor:{
+    actionEditorBlock:{
         name:'div',
         contentEditable: true,
-        class : 'actionEditor',
-        id: 'actionEditor',
+        class : 'actionEditor-block',
+        id: 'actionEditor-block',
         lineNumbers: true,
         innerText:"Write whatever you can think of...",
         //mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
@@ -50,9 +50,10 @@ var actionEditor = {
 }
 
 class Entity {
+    
     constructor(input,output,key,value){
         // console.log(input,output);
-          this.entity = entity.create(input,output,key);
+          this.entity = this.create(input,output,key);
           console.log(this.entity)
           this.entity.id = input.id + index.next().value;
           //getAttributes
@@ -65,13 +66,13 @@ class Entity {
         //   entity.append(this.entity,output);
       }
 
-    static create(input, output, key, value,callback,callbackClass) {
+    create(input, output, key, value,callback,callbackClass) {
       
         if (operate.is(output).includes("HTML")) { //Only HTML creation
             // console.log("create request for ",input[key].name)
             var response = document.createElement(key);
             if(value){
-                process.iterateObj(value,response,key,value)
+            //    process.iterateObj(value,response,key,value)
             }
            // entity.set(input, response, 'id', key + index.next().value);
         }
@@ -138,7 +139,8 @@ class conductor {
 class process { 
     static init(input, output,key,value ,callback, callbackClass) {
         operate.isNotEmpty(callback) ? conductor.conduct(input, output, '', '', callback, callbackClass) : null;
-        
+       // var response = process.iterateObj(input,output);
+      //  return response;
         // var ehhStyleSheet = entity.create('style', document.getElementsByTagName('head')[0],'','' ,'append', entity);
         // ehhStyleSheet.innerHTML = actionEditorCssRules;     
     }
@@ -147,16 +149,16 @@ class process {
         for (var key in input){ 
          //   console.log("found", key, input[key],typeof input[key]);
             if (operate.is(input[key]) === 'Object') {
-                console.log(input,key,input[key])
+               // console.log(input,key,input[key])
                 var buffer = new Entity(input,output,input[key]?.name??key,input[key]);
                // process.iterateObj(input[key],buffer,key,input[key])
-                entity.append(buffer,output);
+                Entity.append(buffer.entity,output);
                 //console.log("appended Object",buffer,output)
             } else if (operate.is(input[key]) === 'Array') {
               //  console.log("found Array", key, input[key])
                 var buffer = new Entity(key,output,key,input[key]);
                 process.iterateArr(input[key],buffer,key,input[key])
-                entity.append(buffer,output);
+                Entity.append(buffer,output);
 
             } else if (operate.is(input[key]) == 'String' || operate.is(input[key]) == 'Boolean' ) {
               //  console.log("found property", key, input[key],typeof input[key])
@@ -179,15 +181,15 @@ class process {
 
             if (operate.is(input[i]) === 'Object') {
                 console.log("Object found in array", input[i].name);
-                var buffer = entity.create(input[i],output,input[i].name,value);
+                var buffer = new Entity(input[i],output,input[i].name,value);
                 process.iterateObj(input[i],buffer,key,value)
-                entity.append(buffer,output);
+                Entity.append(buffer.entity,output);
 
             } else if (operate.is(input[i]) === 'Array') {
                 console.log("found Array", key, input[key])
             } else if (operate.is(input[i]) == 'String') {
               //  console.log("found property, Set Attributes in output", key, input[key])
-                entity.set(input,output,key,input[key])
+                Entity.set(input,output,key,input[key])
             } else {
 
                 console.log("stray found")
@@ -227,8 +229,6 @@ class process {
        // console.log("response",response)
        return response;
     }
-
-
 }
 
 
