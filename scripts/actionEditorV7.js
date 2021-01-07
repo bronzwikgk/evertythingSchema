@@ -217,24 +217,19 @@ class process {
 
 class Creator{
     constructor(input,output){
-       // console.log(input,output);
-        this.output = entity.create(input,output,input?.name??'key');
-        console.log(this.output)
-        this.output.id = input.id + index.next().value;
+       console.log(input,output);
+        this.entity = entity.create(input,output,input?.name??'key');
+        console.log(this.entity)
+        this.entity.id = input.id + index.next().value;
         //getAttributes
         Object.entries(input).forEach(entry => {
             const [key, value] = entry;
-            entity.set(input,output,key,value)            
+            entity.set(input,this.entity,key,value)            
            // console.log(key, value);
          //  check if property is an Object, send for recursion.
         });
-
-        entity.append(this.output,output);
-
-
+        entity.append(this.entity,output);
     }
-
-
 }
 
 
