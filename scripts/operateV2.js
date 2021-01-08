@@ -39,6 +39,22 @@
 
 
 
+class conductor {
+    //this function calls a callback function with a and b parameter. Conducted Routes have to be registered before else will throw error.
+    //  on param = [ anyEvent ]
+    static conduct(a, b, c, d, callback, callbackClass) {
+    // console.log(a, b, callback)
+        //eval(callbackClass.callback(a, b))
+        var response = callbackClass[callback](a, b, c, d);
+      //  console.log("conduct response",response)
+        return response;
+    }
+
+    static conductForEachFlow(a, b, options) {
+
+
+    }
+}
 
 class operator { 
     //    //arr.every(callback(element[, index[, array]])[, thisArg])
@@ -128,6 +144,11 @@ class operate {
     static isOdd(argA) { return numbers.every(function (e) { return Math.abs(e % 2) == 1; }); }
 }
 
+function* createIndex() {
+    let number = 1;
+    while (true)
+        yield number++;
+}
 
 
 

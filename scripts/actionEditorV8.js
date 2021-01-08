@@ -49,7 +49,6 @@ class EventEmitter {
         this._events = {};
         console.log('event constructor',this._events)
     }
-
   on(name, listener) { //adds a listner to the register
     if (!this._events[name]) {
       this._events[name] = [];
@@ -86,11 +85,11 @@ class EventEmitter {
 class Entity extends EventEmitter {  
     constructor(input,output,key,value){
         super();
-        console.log('entity constructor',input,output)
+        console.log('entity constructor',input,output.constructor.name)
         switch (input?.constructor) {
             case Object:    
                this.entity = process.iterateObj(input,output);
-             //  console.log("input is Object         >>",this.entity);
+              console.log("input is Object         >>",this.entity);
             case Array:
               
             case String:
@@ -111,7 +110,7 @@ class Entity extends EventEmitter {
         //   entity.append(this.entity,output);
       }
     static create(input, output, key, value,callback,callbackClass) {
-       //  console.log("create request for ",input,output)
+       
         if (operate.is(output).includes("HTML")) { //Only HTML creation
           
             var response = document.createElement(key);
@@ -120,7 +119,20 @@ class Entity extends EventEmitter {
             }
            // entity.set(input, response, 'id', key + index.next().value);
         }
-       // console.log('created', response, input, output, key, value, callback, callbackClass);
+        if (operate.is(output).includes("Object")) { //Only HTML creation
+         console.log("create request for ",input,output,key,value)     
+         
+         response = new Object()
+        
+            //response = key;
+            //response.set(value,key)
+            //var response = document.createElement(key);
+            if(value){
+            //    process.iterateObj(value,response,key,value)
+            }
+           // entity.set(input, response, 'id', key + index.next().value);
+        }
+       
 
 //        operate.isNotEmpty(callback) ? conductor.conduct(response, output, '', '', callback, callbackClass) : null;
         
@@ -129,8 +141,8 @@ class Entity extends EventEmitter {
 
             var response = conductor.conduct(response, output, '', '', callback, callbackClass);
         }
-//              console.log("create", response)
-
+        console.log("response", response);
+            if(!response) console.log("no response", response);
         return response;
     }
     static append(input, output, key, value, callback, callbackClass) {
@@ -139,14 +151,25 @@ class Entity extends EventEmitter {
         if (operate.is(output).includes("HTML")) { //Only HTML creation
             var response = output.appendChild(input);
         }
+        if (operate.is(output).includes("Object")) { //Only HTML creation
+            console.log("append request for ",input,output)     
+            output[key] = input;
+            var response = output;   
+            //var response = document.createElement(key);
+               if(value){
+               //    process.iterateObj(value,response,key,value)
+               }
+            }
+           
 
 
-   // console.log('appended',response)
+    console.log('appended',response)
         return response;
     }
     static set(input, output, key, value, callback, callbackClass) {
+       // console.log("setting",key, value,"in",output)
         if (operate.is(output).includes("HTML")) { //Only HTML creation
-          //console.log("setting",key, value,"in",output)
+          
            if(operate.isIn(key,htmlAttributesList)){
            // console.log("setting",key, value,"in",output)
             output.setAttribute(key,value)
@@ -176,10 +199,9 @@ class process extends Entity {
         for (var key in input){ 
          //   console.log("found", key, input[key],typeof input[key]);
             if (operate.is(input[key]) === 'Object') {
-            //  console.log("Sending to create",input,key,input[key],output)
-                
-              var buffer = Entity.create(input,output,input[key]?.name??key,input[key]);
-                
+              console.log("Sending to create",input,key,input[key],output)
+              var buffer = Entity.create(input,output,key,input[key]);
+              console.log('buffer here :>>>>>>>',buffer)
                 process.iterateObj(input[key],buffer,key,input[key])
                 Entity.append(buffer,output);
                 //console.log("appended Object",buffer,output)
@@ -200,7 +222,7 @@ class process extends Entity {
                 var response = conductor.conduct(input, output, key, input[key], callback, callbackClass);
             }
         }
-      //  console.log("iterator respon", response);
+       console.log("iterator respon", output);
         return output;
     }
     static iterateArr(input, output, key, value, callback, callbackClass) { 
@@ -277,8 +299,6 @@ class conductor {
     }
 }
 
-
-
 /**
  * The Controller. Controller responds to user actions and
  * invokes changes on the model.
@@ -311,7 +331,6 @@ class EntityController {
     }
 }
 
-
 class EhhVew extends Entity {
     constructor(input,output){ 
         super();
@@ -320,7 +339,7 @@ class EhhVew extends Entity {
         this.entityView = new Entity(input,output);
         //console.log(this.entityView.entity);
         this.entityView.entity.addEventListener('input', e => this.emit(e,'input'));
-        
+
     }
     
     refresh(){
@@ -328,19 +347,13 @@ console.log("refreshing")
     }
 }
 
-
-
-
-
-
-
 window.onload = init();
 
 function init(){
 
     ehhAppOutput = document.createElement('ehhOutput');
-    ehhAppView = new EhhVew(actionEditor,ehhAppOutput);
-  //  ehhAppModel = new Entity(actionEditor);
+    //ehhAppView = new EhhVew(actionEditor,ehhAppOutput);
+    ehhAppModel = new Entity(actionEditor,{});
     //var ehhApp = new Controller(ehhAppModel,ehhAppView);
 
     document.getElementsByTagName('body')[0].appendChild(ehhAppOutput);

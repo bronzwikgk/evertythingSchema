@@ -1,10 +1,3 @@
-function* createIndex() {
-    let number = 1;
-    while (true)
-        yield number++;
-}
-
-const index = createIndex();
 
 var actionEditor = {
     actionEditorBlock:{

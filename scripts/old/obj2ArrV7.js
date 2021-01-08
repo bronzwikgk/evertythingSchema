@@ -85,6 +85,8 @@ class mutate {
         //  console.log(output)
         return output;
     }
+
+
     static processObj(input, output, previousRow, currentRow, currentKey, d, path, parent) {
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
