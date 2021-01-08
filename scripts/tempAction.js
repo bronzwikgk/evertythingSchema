@@ -42,41 +42,38 @@ var actionEditor = {
     ]
 }
 var htmlAttributesList = [ 'name','label','onclick','lineNumbers', 'class','id','text','title','content','value','type']
-
-function deepIterate(source,target ) {
-   // if (typeof target !== 'object' || typeof source !== 'object') return false; // target or source or both ain't objects, merging doesn't make sense
-    for (var prop in source) {
-       // if (!source.hasOwnProperty(prop)) continue; // take into consideration only object's own properties.
-        if (prop in target) { // handling merging of two properties with equal names
-            if (typeof target[prop] !== 'object') {
-         //       target[prop] = source[prop];
-            } else {
-                if (typeof source[prop] !== 'object') {
-           //         target[prop] = source[prop];
-                } else {
-                    if (source[prop].concat) { // two arrays get concatenated
-             //           target[prop] = target[prop].concat(source[prop]);
-                    } else { // two objects get merged recursively
-                        target[prop] = deepIterate(target[prop], source[prop]);
-                    }
-                }
-            }
-        } else { // new properties get added to target
-            target[prop] = source[prop];
-        }
-    }
-    return target;
-}
-
-class process{
-    static processReq(input,output,){
-
-        //create output
+//create output
         //filter keys
         //filter values
         //append to output
         // getChild
 
+class process{
+
+    static processReq(input,output,key,value){
+        
+        console.log(input,output,key,value);
+        
+        if(operate.is(value)=== 'Object'){
+           
+            var buffer = Entity.create(input,output,key);
+            process.iterateObj(value,buffer,key);
+            Entity.append(buffer,output);
+          //  console.log("Object",key, value,output);
+        } else if(operate.is(value)=== 'Array'){
+
+            var buffer = Entity.create(input,output,key);
+        //    console.log('Array',key, value, buffer);
+            process.iterateArr(value,buffer,key);
+            
+            Entity.append(buffer,output);
+            
+        } else if(operate.is(value) === 'String'){
+            
+            console.log('String',key, value);
+            Entity.set(input,this.output,key,value);           
+        }  
+        
     }
     
     static iterateObj(input,output){
@@ -100,7 +97,7 @@ class process{
             //Entity.set(input,this.entity,key,value);           
         }
     }
-    console.log('Iterate Objoutput',output)
+   // console.log('Iterate Objoutput',output)
     return output;
 }
 
@@ -145,35 +142,15 @@ static iterateArr(input, output, key, value, callback, callbackClass) {
 }
 
 class Entity {
-    constructor(input,output){
-        Object.entries(input).forEach(entry => { const [key, value] = entry;
-            
-            if(operate.is(value)=== 'Object'){
-                var buffer = Entity.create(input,output,key);
-                process.iterateObj(value,buffer,key);
-                Entity.append(buffer,output);
-                console.log("Object",key, value,output);
-            } else if(operate.is(value)=== 'Array'){
-                
-                var buffer = Entity.create(input,output,key);
-                console.log('Array',key, value, buffer);
-                process.iterateArr(value,buffer,key);
-                Entity.append(buffer,output);
-                
-            } else if(operate.is(value) === 'String'){
-                console.log('String',key, value);
-              //  Entity.set(input,this.entity,key,value);           
-            }  
-            console.log("Creator",this.output)
-         //  check if property is an Object, send for recursion.
-        });
+    constructor(input,output){    
+       this.entity = process.processReq(input,output);
+       console.log(this);
     }
-
 
     static create(input, output, key, value,callback,callbackClass) {
        
         if (operate.is(output).includes("HTML")) { //Only HTML creation
-          console.log('create request for ',key)
+       //   console.log('create request for ',key)
             var response = document.createElement(key);
            // Entity.set(input, response, 'id', key + entityIndex.next().value);
         }
@@ -190,10 +167,7 @@ class Entity {
             }
            // entity.set(input, response, 'id', key + index.next().value);
         }
-       
-
-//        operate.isNotEmpty(callback) ? conductor.conduct(response, output, '', '', callback, callbackClass) : null;
-        
+               
 
         if (operate.isNotEmpty(callback)) {
 
@@ -203,6 +177,7 @@ class Entity {
             if(!response) console.log("no response", output);
         return response;
     }
+
     static append(input, output, key, value, callback, callbackClass) {
    // console.log('appending', input,output)
 
@@ -214,9 +189,7 @@ class Entity {
             output[key] = input;
             var response = output;   
             //var response = document.createElement(key);
-               if(value){
-               //    process.iterateObj(value,response,key,value)
-               }
+            
             }
            
 
@@ -224,12 +197,13 @@ class Entity {
    // console.log('appended',response)
         return response;
     }
+
     static set(input, output, key, value, callback, callbackClass) {
        // console.log("setting",key, value,"in",output)
         if (operate.is(output).includes("HTML")) { //Only HTML creation
           
            if(operate.isIn(key,htmlAttributesList)){
-           // console.log("setting",key, value,"in",output)
+           console.log("setting",key, value,"in",output)
             output.setAttribute(key,value)
             //console.log(output);
            } else {
@@ -242,8 +216,14 @@ class Entity {
         }
         return output;
     }
+
+
+
+
 }
 ehhAppOutput = document.createElement('ehhOutput');
 
 var temp = new Entity(actionEditor,ehhAppOutput);
-console.log(temp);
+document.getElementsByTagName('body')[0].appendChild(temp.output);
+console.log("all set and done")
+//console.log(temp.output);

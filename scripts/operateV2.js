@@ -63,6 +63,7 @@ class operator {
 }
 
 class operate {
+    
     // operate to check if the input is not null or undefined to be added
     static isEmpty(argA) { return Object.keys(argA).length === 0 ? true : false }
     static isNotEmpty(argA) { return argA !== '' && argA !== null && typeof argA !== 'undefined' ? true : false }
