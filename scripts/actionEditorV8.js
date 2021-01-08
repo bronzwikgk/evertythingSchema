@@ -1,4 +1,3 @@
-
 var actionEditor = {
     actionEditorBlock:{
         name:'div',
@@ -16,7 +15,8 @@ var actionEditor = {
         {   name:'button',
             type: 'div',
             'innerText':'add',
-            'onclick' : 'console.log("i was clicked")'
+            'id':'add',
+            'onclick' : 'console.log("addButtonClicked")'
         },
         {   name:'button',
             type: 'div',
@@ -50,7 +50,7 @@ class EventEmitter {
         console.log('event constructor',this._events)
     }
 
-  on(name, listener) {
+  on(name, listener) { //adds a listner to the register
     if (!this._events[name]) {
       this._events[name] = [];
     }
@@ -86,10 +86,9 @@ class EventEmitter {
 class Entity extends EventEmitter {  
     constructor(input,output,key,value){
         super();
-     //   console.log('entity constructor',input,output)
+        console.log('entity constructor',input,output)
         switch (input?.constructor) {
             case Object:    
-
                this.entity = process.iterateObj(input,output);
              //  console.log("input is Object         >>",this.entity);
             case Array:
@@ -319,13 +318,9 @@ class EhhVew extends Entity {
       //  console.log('ehhView Constructor',input,output)
         this.input = input,
         this.entityView = new Entity(input,output);
-       // console.log(this.entityView.entity);
+        //console.log(this.entityView.entity);
         this.entityView.entity.addEventListener('input', e => this.emit(e,'input'));
-        this.on('input', () => this.refresh());
-
-       //  this.on('itemAdded', () => this.rebuildList()).on('itemRemoved', () => this.rebuildList());
-       // elements.list.addEventListener('change', e => this.emit('listModified', e.target.selectedIndex));
-       // console.log(this.entityView)
+        
     }
     
     refresh(){

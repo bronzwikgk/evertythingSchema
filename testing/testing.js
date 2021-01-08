@@ -16,8 +16,6 @@ class EventEmitter {
     }
 }
 
-
-
 /**
  * The Model. Model stores items and notifies
  * observers about changes.
@@ -26,6 +24,7 @@ class ListModel extends EventEmitter {
     constructor(items) {
         super();
         this._items = items || [];
+
         this._selectedIndex = -1;
     }
 
