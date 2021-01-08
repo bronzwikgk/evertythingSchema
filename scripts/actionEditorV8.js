@@ -15,7 +15,7 @@ var actionEditor = {
     toolBar:[
         {   name:'button',
             type: 'div',
-            'innerText':'BTN',
+            'innerText':'add',
             'onclick' : 'console.log("i was clicked")'
         },
         {   name:'button',
@@ -47,13 +47,22 @@ class EventEmitter {
     constructor() {
         //eventRegistry
         this._events = {};
-        console.log(this._events)
+        console.log('event constructor',this._events)
     }
-    on(evt, listener) { //adds to event register
-        console.log(evt,listener);
-        (this._events[evt] || (this._events[evt] = [])).push(listener);
-        return this;
+
+  on(name, listener) {
+    if (!this._events[name]) {
+      this._events[name] = [];
     }
+    this._events[name].push(listener);
+    console.log('event added',this._events)
+    return this;
+    }
+    // on(evt, listener) { //adds to event register
+    //     console.log(evt,listener);
+    //     (this._events[evt] || (this._events[evt] = [])).push(listener);
+    //     return this;
+    // }
     emit(evt, arg) {// emit a function from the event register;
        
         console.log(evt,arg);
@@ -63,15 +72,26 @@ class EventEmitter {
             lsn(arg);
         });
     }
+    removeListener(name, listenerToRemove) {
+        if (!this._events[name]) {
+          throw new Error(`Can't remove a listener. Event "${name}" doesn't exits.`);
+        }
+    
+        const filterListeners = (listener) => listener !== listenerToRemove;
+    
+        this._events[name] = this._events[name].filter(filterListeners);
+      }
 }
 
 class Entity extends EventEmitter {  
     constructor(input,output,key,value){
         super();
+     //   console.log('entity constructor',input,output)
         switch (input?.constructor) {
             case Object:    
+
                this.entity = process.iterateObj(input,output);
-               console.log("input is Object         >>",this.entity);
+             //  console.log("input is Object         >>",this.entity);
             case Array:
               
             case String:
@@ -92,9 +112,9 @@ class Entity extends EventEmitter {
         //   entity.append(this.entity,output);
       }
     static create(input, output, key, value,callback,callbackClass) {
-      
+       //  console.log("create request for ",input,output)
         if (operate.is(output).includes("HTML")) { //Only HTML creation
-            // console.log("create request for ",input[key].name)
+          
             var response = document.createElement(key);
             if(value){
             //    process.iterateObj(value,response,key,value)
@@ -144,7 +164,6 @@ class Entity extends EventEmitter {
     }
 }
 
-
 class process extends Entity { 
     static init(input, output,key,value ,callback, callbackClass) {
         operate.isNotEmpty(callback) ? conductor.conduct(input, output, '', '', callback, callbackClass) : null;
@@ -158,8 +177,9 @@ class process extends Entity {
         for (var key in input){ 
          //   console.log("found", key, input[key],typeof input[key]);
             if (operate.is(input[key]) === 'Object') {
-              // console.log("Sending to create",input,key,input[key])
-                var buffer = Entity.create(input,output,input[key]?.name??key,input[key]);
+            //  console.log("Sending to create",input,key,input[key],output)
+                
+              var buffer = Entity.create(input,output,input[key]?.name??key,input[key]);
                 
                 process.iterateObj(input[key],buffer,key,input[key])
                 Entity.append(buffer,output);
@@ -241,7 +261,6 @@ class process extends Entity {
     }   
 }
 
-
 class conductor {
     //this function calls a callback function with a and b parameter. Conducted Routes have to be registered before else will throw error.
     //  on param = [ anyEvent ]
@@ -259,21 +278,6 @@ class conductor {
     }
 }
 
-
-class EhhVew extends Entity{
-    constructor(input,output){ 
-        super();
-        console.log(input,output)
-        this.input = input,
-        this.entityView = new Entity(input,output);
-        console.log(this.entityView.entity);
-        this.entityView.entity.addEventListener('keydown', e => this.emit(e));
-        //  model.on('itemAdded', () => this.rebuildList()).on('itemRemoved', () => this.rebuildList());
-       // elements.list.addEventListener('change', e => this.emit('listModified', e.target.selectedIndex));
-       // console.log(this.entityView)
-    }
-    
-}
 
 
 /**
@@ -309,6 +313,26 @@ class EntityController {
 }
 
 
+class EhhVew extends Entity {
+    constructor(input,output){ 
+        super();
+      //  console.log('ehhView Constructor',input,output)
+        this.input = input,
+        this.entityView = new Entity(input,output);
+       // console.log(this.entityView.entity);
+        this.entityView.entity.addEventListener('input', e => this.emit(e,'input'));
+        this.on('input', () => this.refresh());
+
+       //  this.on('itemAdded', () => this.rebuildList()).on('itemRemoved', () => this.rebuildList());
+       // elements.list.addEventListener('change', e => this.emit('listModified', e.target.selectedIndex));
+       // console.log(this.entityView)
+    }
+    
+    refresh(){
+console.log("refreshing")
+    }
+}
+
 
 
 
@@ -320,9 +344,9 @@ window.onload = init();
 function init(){
 
     ehhAppOutput = document.createElement('ehhOutput');
-    ehhAppView = new EhhVew(actionEditor,ehhApp);
-    ehhAppModel = new Entity(actionEditor);
-    var ehhApp = new Controller(ehhAppModel,ehhAppView);
+    ehhAppView = new EhhVew(actionEditor,ehhAppOutput);
+  //  ehhAppModel = new Entity(actionEditor);
+    //var ehhApp = new Controller(ehhAppModel,ehhAppView);
 
     document.getElementsByTagName('body')[0].appendChild(ehhAppOutput);
 }
