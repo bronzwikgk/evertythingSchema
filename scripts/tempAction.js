@@ -1,4 +1,5 @@
 var actionEditor = {
+    style: 'min-height : 200px; width: 400px; border-top: 0px; padding: 21px; overflow: auto;',
     actionEditorBlock:{
         name:'div',
         contentEditable: true,
@@ -9,19 +10,6 @@ var actionEditor = {
         //mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
         //output: ['self', 'output'],
         state: 'idle',
-        style: 'min-height : 200px; width: 400px; border-top: 0px; padding: 21px; overflow: auto;',
-        actionEditorBlock:{
-            name:'div',
-            contentEditable: true,
-            class : 'actionEditor-block',
-            id: 'actionEditor-block',
-            lineNumbers: true,
-            innerText:"Write whatever you can think of...",
-            //mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
-            //output: ['self', 'output'],
-            state: 'idle',
-            style: 'min-height : 200px; width: 400px; border-top: 0px; padding: 21px; overflow: auto;',
-            }
         
     },
     toolBar:[
