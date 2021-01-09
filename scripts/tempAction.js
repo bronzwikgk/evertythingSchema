@@ -91,18 +91,16 @@ class process{
       for (var i = 0; i < input.length; i++){
          //console.log("Object found in array", input[i]);
 
-          if (operate.is(input[i]) === 'Object') {
-            //  console.log("Object found in array", input[i].name);
-           // var response = conductor.conduct(input, output, input[i].name, '', callback, callbackClass);
-           var response = Entity.create(input[i],output,input[i].name);
-           // console.log("Object",key, value,buffer);
+          if (operate.is(input[i]) === 'Object') { //console.log("Object in array",response)
+           
+            var response = Entity.create(input[i],output,input[i].name);
             process.iterateObj(input[i],response,input[i].name,)
             Entity.append(response,output);
-             //console.log("Object in array",response)
-          } else if (operate.is(input[i]) === 'Array') {
-             // console.log("found Array", key, input[key])
-          } else if (operate.is(input[i]) == 'String') {
-            //  console.log("found property, Set Attributes in output", key, input[key])
+             
+          } else if (operate.is(input[i]) === 'Array') { // console.log("found Array", key, input[key])
+             
+          } else if (operate.is(input[i]) == 'String') { //  console.log("found property, Set Attributes in output", key, input[key])
+            
              // Entity.set(input,output,key,input[key])
           } else {
 
@@ -148,14 +146,23 @@ class Entity {
             }
            // entity.set(input, response, 'id', key + index.next().value);
         }
-        if (operate.isNotEmpty(callback)) {
+        if (operate.is(output).includes("Array")) { //Only HTML creation
+            console.log("create request for ",input,output,key,value)     
+            
+            response = new Object()
+           
+               //response = key;
+               //response.set(value,key)
+               //var response = document.createElement(key);
+               if(value){
+               //    process.iterateObj(value,response,key,value)
+               }
+              // entity.set(input, response, 'id', key + index.next().value);
+           }
 
-          //  var response = conductor.conduct(response, output, '', '', callback, callbackClass);
-        }
         if(!response) console.log("no response", output);
         return response;
     }
-
     static append(input, output, key, value, callback, callbackClass) {
    // console.log('appending', input,output)
 
@@ -169,6 +176,13 @@ class Entity {
             //var response = document.createElement(key);
             
             }
+        if (operate.is(output).includes("Array")) { //Only HTML creation
+                // console.log("append request for ",input,output)     
+                 output.push(input);
+                 var response = output;   
+                 //var response = document.createElement(key);
+                 
+                 }
            
 
 
