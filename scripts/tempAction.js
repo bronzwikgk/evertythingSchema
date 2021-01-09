@@ -10,7 +10,20 @@ var actionEditor = {
         //output: ['self', 'output'],
         state: 'idle',
         style: 'min-height : 200px; width: 400px; border-top: 0px; padding: 21px; overflow: auto;',
-        },
+        actionEditorBlock:{
+            name:'div',
+            contentEditable: true,
+            class : 'actionEditor-block',
+            id: 'actionEditor-block',
+            lineNumbers: true,
+            innerText:"Write whatever you can think of...",
+            //mimeMode: ['html', 'richText', 'json', 'css', 'javascript'],
+            //output: ['self', 'output'],
+            state: 'idle',
+            style: 'min-height : 200px; width: 400px; border-top: 0px; padding: 21px; overflow: auto;',
+            }
+        
+    },
     toolBar:[
         {   name:'button',
             type: 'div',
@@ -210,11 +223,11 @@ class Entity {
 }
 
 
-//ehhAppOutput = document.createElement('ehhOutput');
-//var temp = new Entity(actionEditor,ehhAppOutput);
+ehhAppOutput = document.createElement('ehhOutput');
+var temp = new Entity(actionEditor,ehhAppOutput);
 //newBlock = Entity.create(actionEditor.actionEditorBlock,temp.entity)
 //console.log(newBlock)
 //console.log(temp.entity)
-//document.getElementsByTagName('body')[0].appendChild(temp.entity);
+document.getElementsByTagName('body')[0].appendChild(temp.entity);
 console.log("all set and done")
 //console.log(temp.output);
