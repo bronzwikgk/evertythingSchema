@@ -7,21 +7,8 @@
     <link rel="stylesheet" id = 'actionEditor.css' type="text/css" href="style/action.css">
 </head>
 <body>
-    <div class="topbar">
-        <div class="topbar-row">
-            <label class="switch"><input id="theme-switch" type="checkbox"></label>
-            <button class="topbar-button" onclick="toggleRTL()" type="button"><i class="fas fa-exchange-alt"></i>&nbsp; RTL Mode</button>
-            <button class="topbar-button" onclick="clearStorage()" type="button"><i class="fas fa-pencil-alt"></i>&nbsp; New Text</button>
-            <button class="topbar-button" onclick="triggerImportFile()" type="button"><i class="fas fa-upload"></i>&nbsp; Import Text</button>
-            <input id="import-file" type="file" accept=".md,.html">
-        </div>
-    </div>
-    <div id="editor" class="editor" data-simplebar data-simplebar-auto-hide="false">
-        <div id="content" class="content" contenteditable="true">
-            <p>Once upon a time...✏️</p>
-        </div>
-    </div>
     <script type="text/javascript" src="scripts/operateV2.js"></script>
+    <script type="text/javascript" src="scripts/actionEditorV11.js"></script>
    
 </body>
 </html>
