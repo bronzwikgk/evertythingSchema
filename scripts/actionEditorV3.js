@@ -21,7 +21,7 @@ class ActionEditorModel{
 
 }
  /**
- * Constroller :: listen and conduct action || event && View && Model 
+ * Constroller :: listen and conduct action || event on  View && Model 
  */
 
 class ActionEditorControl{

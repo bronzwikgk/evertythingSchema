@@ -1,12 +1,3 @@
-{
-    //ehhApp takes care of all the setup or initialising task, when served over HTTP.
-    //this is similar ot onInstall for a chrome Extension or webApp.
-    //List of function and features
-    // Detect Features from the Config.Json
-    //Set Nessecary Key's in LocalStorage
-    //Init Listeners
-    //init Dom..Assingn a ID to each element of Dom.More like Content/Index scripts file
-}
 
 class dataHelpers { 
 
@@ -16,7 +7,8 @@ static find(entity, keyTofind) {
         return !key.indexOf(keyTofind);
     });
     return result;
-    }
+}
+    
 static isEmpty(obj) {
         for (var prop in obj) {
             if (obj.hasOwnProperty(prop))
@@ -177,7 +169,7 @@ static resize(mm, newElement, startX, startY) {
 
 }
 
-//https://github.com/philipwalton/router/blob/master/index.js
+
 class ehhEvent {
     // this function acts like a event conductor, read it's event command mapp from a json file.Ignore Events from Json to be implemented
     static onEvent(e) {
