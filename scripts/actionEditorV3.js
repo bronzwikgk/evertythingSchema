@@ -33,7 +33,6 @@ class ActionEditorControl{
         //display default Content
         this.onContentChange(this.actionEditorModel)
     }
-
     onContentChange() {
         
     }
@@ -46,7 +45,6 @@ class ActionEditorControl{
     renderActionEditor() {
         const actionData = ActionEditorControl.getActionData();
     }
-
  }
 
 
