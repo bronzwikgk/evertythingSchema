@@ -2,7 +2,7 @@
 //Need to add options.
 //set has to be a seperate method
 //Child index need to be created along with the path.
-//https://adrianmejia.com/data-structures-for-beginners-graphs-time-complexity-tutorial/
+//
 
 function getEntityType(entity) {
     return Object.getPrototypeOf(entity).constructor.name;//entity.__proto__.constructor.name
